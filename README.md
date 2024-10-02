@@ -7,7 +7,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 ## Andamento do Curso
 ![2](https://github.com/user-attachments/assets/8349fc16-2675-42d5-adf3-ef93b0927c4a)
 
-- [x] Seção 1: [Introdução](#introdução)
+- [x] Seção 1: [Introdução](#seção-2---introdução)
 - [x] Seção 2: [Instalação](#seção-2---instalando-mongodb)
 - [ ] Seção 3: [Básico](#seção-3---básico)
 - [ ] Seção 4: [CRUD](#crud)
@@ -23,14 +23,8 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 - [ ] Seção 14: Agregação
 - [ ] Seção 15: Agregação Netflix
 
-## Introdução
-
-1. **O que é o MongoDB?**
-   
-    MongoDB é um banco de dados NoSQL, orientado a documentos, que armazena informações no formato de documentos JSON (JavaScript Object Notation). Ao contrário dos bancos de dados relacionais que usam tabelas e linhas, o MongoDB utiliza uma es
-
-
-## Introdução
+---
+### Seção 1 - Introdução
 
 1. **O que é o MongoBD ?**
    

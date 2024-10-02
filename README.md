@@ -10,7 +10,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 - [x] Seção 1: [Introdução](#seção-1---introdução)
 - [x] Seção 2: [Instalação](#seção-2---instalando-mongodb)
 - [ ] Seção 3: [Básico](#seção-3---básico)
-- [ ] Seção 4: [CRUD](#crud)
+- [ ] Seção 4: [CRUD](#seção-4---crud)
 - [ ] Seção 5: Modelagem e Relacionamentos
 - [ ] Seção 6: Schema e Validação
 - [ ] Seção 7: Algumas preparações para as consultas
@@ -47,7 +47,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 ### Seção 3 - Básico
 
-### CRUD
+### Seção 4 - CRUD
 
 No MongoDB, CRUD é um acrônimo que representa as operações básicas de manipulação de dados:
 
@@ -59,8 +59,54 @@ No MongoDB, CRUD é um acrônimo que representa as operações básicas de manip
 
 Para realizar essas operações no mongoDB é importante conhecer as variações desses comandos
 
+| Operação | Único           | Múltiplos       |
+|----------|-----------------|-----------------|
+| Create   | `insertOne()`   | `insertMany()`  |
+| Read     | `findOne()`     | `find()`        |
+| Update   | `updateOne()`   | `updateMany()`  |
+| Delete   | `deleteOne()`   | `deleteMany()`  |
 
+Comandos unicos são usados para atuar sobre documentos unicos, enquanto os múltiplos são usados para
+atuar sobre multiplos documentos de uma vez só.
 
+### 1. **Create (Inserir)**
+
+- **`insertOne()`**: Insere um único documento.
+  
+  ```javascript
+  db.collection.insertOne({nome: "João", idade: 30, cidade: "São Paulo"});
+  ```
+ - **`insertMany()`**: Insere múltiplos documentos.
+ ```javascript
+  db.collection.insertMany([{nome: "Maria", idade: 25, cidade: "Rio de Janeiro"}, {nome: "Carlos", idade: 28, cidade: "Belo Horizonte"}]);
+```
+
+### 2. Read (Ler)
+
+- **`findOne`**: Busca um único documento
+  
+  ```javascript
+  db.collection.findOne({nome: "João"});
+
+- **`Find()`**: Busca múltiplos documentos
+
+  ```javascript
+   db.collection.find({idade: { $gte: 25 }});
+  
+### 2. Delete (Deletar)
+
+- **`DeleteOne`**: Deleta um único documento
+  
+  ```javascript
+  db.collection.deleteOne({nome: "João"});
+
+- **`DeleteMany()`**: Atualiza múltiplos documentos
+
+  ```javascript
+   db.collection.deleteMany({ idade: { $lt: 30 }});  // Remove todos os usuários com idade menor que 30
+  ```
+
+  
 
 
 

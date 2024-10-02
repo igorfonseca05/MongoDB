@@ -1,4 +1,4 @@
-# MongoDB
+ # MongoDB
 ![capa mongo](https://github.com/user-attachments/assets/1767d8e5-11e9-4dc2-af33-0b7dc5cc2c82)
 
 ## Descrição
@@ -7,10 +7,10 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 ## Andamento do Curso
 ![2](https://github.com/user-attachments/assets/8349fc16-2675-42d5-adf3-ef93b0927c4a)
 
-- [x] Seção 1: [Introdução](#seção-1-introdução)
-- [x] Seção 2: Instalação
-- [ ] Seção 3: Básico
-- [ ] Seção 4: CRUD
+- [x] Seção 1: [Introdução](#introdução)
+- [x] Seção 2: [Instalação](#seção-2---instalando-mongodb)
+- [ ] Seção 3: [Básico](#seção-3---básico)
+- [ ] Seção 4: [CRUD](#crud)
 - [ ] Seção 5: Modelagem e Relacionamentos
 - [ ] Seção 6: Schema e Validação
 - [ ] Seção 7: Algumas preparações para as consultas
@@ -23,8 +23,14 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 - [ ] Seção 14: Agregação
 - [ ] Seção 15: Agregação Netflix
 
-## Anotações
-### Seção 1 - Introdução
+## Introdução
+
+1. **O que é o MongoDB?**
+   
+    MongoDB é um banco de dados NoSQL, orientado a documentos, que armazena informações no formato de documentos JSON (JavaScript Object Notation). Ao contrário dos bancos de dados relacionais que usam tabelas e linhas, o MongoDB utiliza uma es
+
+
+## Introdução
 
 1. **O que é o MongoBD ?**
    
@@ -47,7 +53,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 ### Seção 3 - Básico
 
-### Seção 4 - CRUD
+### CRUD
 
 No MongoDB, CRUD é um acrônimo que representa as operações básicas de manipulação de dados:
 

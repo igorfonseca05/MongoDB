@@ -56,9 +56,9 @@ No MongoDB, CRUD é um acrônimo que representa as operações básicas de manip
 * Read (Ler): Consulta e recupera documentos existentes.
 * Update (Atualizar): Modifica dados de documentos existentes.
 * Delete (Excluir): Remove documentos de uma coleção.
-* Essas operações permitem gerenciar e interagir com os dados no banco de forma completa.
 
-Para realizar essas operações no mongoDB é importante conhecer as variações desses comandos
+Essas operações permitem gerenciar e interagir com os dados no banco de forma completa. Alem disso
+essas operações no mongoDB é importante conhecer as variações desses comandos
 
 | Operação | Único           | Múltiplos       |
 |----------|-----------------|-----------------|

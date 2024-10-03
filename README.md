@@ -1,5 +1,5 @@
 
-![capa mongo](https://github.com/user-attachments/assets/1767d8e5-11e9-4dc2-af33-0b7dc5cc2c82)
+![header mongo](https://github.com/user-attachments/assets/7585844f-ee1a-4950-a1a4-ab0825611fc5)
 
 ## Descrição
 Este repositório contém materiais e projetos relacionados aos meus estudos de MongoDB ministrado pelo professor **Renan Pallin**. Aqui, você encontrará exemplos de código, anotações e exercícios práticos que abrangem desde os conceitos básicos até tópicos avançados. O objetivo é consolidar o aprendizado e aplicar as melhores práticas no uso do MongoDB.
@@ -35,7 +35,8 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
     Os bancos de dados surgiram nos anos 1960 com sistemas baseados em arquivos, evoluindo para bancos relacionais nos anos 1970, que utilizam tabelas e colunas para organizar dados. Com o crescimento das necessidades de armazenamento e processamento, surgiram os bancos de dados NoSQL, como o MongoDB. O MongoDB organiza os dados usando **collections** (coleções) e **documents** (documentos), onde cada documento é um registro flexível no formato JSON. Isso permite armazenar informações complexas e com diferentes esquemas dentro de uma mesma coleção.   
 
-![Group 9](https://github.com/user-attachments/assets/3337087d-ef8a-478e-aef8-a0447ad9ec8c)
+![Group 8](https://github.com/user-attachments/assets/40574e5f-ac31-4373-877b-d53ecf77d782)
+
 
 ### Seção 2 - Instalando MongoDB
 
@@ -106,7 +107,9 @@ atuar sobre multiplos documentos de uma vez só.
    db.collection.deleteMany({ idade: { $lt: 30 }});  // Remove todos os usuários com idade menor que 30
   ```
 
-  
+  ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)
+
+
 
 
 

@@ -83,12 +83,12 @@ atuar sobre multiplos documentos de uma vez só.
 
 - **`insertMany()`**: Insere múltiplos documentos.
 
-```javascript
-db.collection.insertMany([
-  { nome: "Maria", idade: 25, cidade: "Rio de Janeiro" },
-  { nome: "Carlos", idade: 28, cidade: "Belo Horizonte" },
-]);
-```
+  ```javascript
+  db.collection.insertMany([
+    { nome: "Maria", idade: 25, cidade: "Rio de Janeiro" },
+    { nome: "Carlos", idade: 28, cidade: "Belo Horizonte" },
+  ]);
+  ```
 
 ### 2. Read (Ler)
 
@@ -103,6 +103,38 @@ db.collection.insertMany([
   ```javascript
   db.collection.find({ idade: { $gte: 25 } });
   ```
+
+  No último exemplo acima vemos o uso de operadores que, no **MongoDB**, são usados em operações que
+  nos permitem filtrar as buscas entre intervalos(operadores de comparação), verificar se determinado campo existe(**operador de existência**) em algum documento dentro do banco e muitos outros que veremos com detalhes.
+
+  ```javascript
+  db.collection.find({ especial: { $exist: true } });
+  ```
+
+  no codigo acima, usando o operador operador de existência,
+  buscamos pelo campo "especial", caso exista algum documento que atenda a busca ele será retornado como resultado.
+
+  ***
+
+  ### Projections
+
+  No MongoDB, projections são usadas para especificar quais campos de um documento devem ser incluídos ou excluídos nos resultados de uma consulta. Em outras palavras, as projeções permitem que você controle exatamente quais partes dos documentos serão retornadas, melhorando a performance ao evitar o retorno de dados desnecessários.  
+   Para usar projections e filtrar quais campos do documento queremos ver devemos usar a sintax abaixo:
+
+  ```javascript
+  db.collection.find({ query }, { projections });
+  ```
+
+  Onde a seleção dos campos que derão ser mostrados na busca será dada por **0 / false** para não mostrar determinado campo e **1 / true** para mostrar o campo. Vejam o exemplo abaixo e o resultado da busca:
+
+  ```javascript
+  db.collection.find(
+    { name: "Aline" },
+    { _id: 0, name: 1, idade: 1, sobrenome: 0 }
+  );
+  ```
+
+  na busca acima, estamos buscando por documentos que contenham o nome "Aline" dentro de nossa base, e estamos selecionando para que o seja mostrado na busca um documento como:
 
 ### 2. Delete (Deletar)
 

@@ -28,14 +28,14 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 # Seção 1 - Introdução
 
-1. **O que é o MongoBD ?**
+.1. **O que é o MongoBD ?**
 
-   MongoDB é um banco de dados NoSQL, orientado a documentos, que armazena informações no formato de documentos JSON (JavaScript Object Notation). Ao contrário dos bancos de dados relacionais que usam tabelas e linhas, o MongoDB utiliza uma estrutura flexível de dados, permitindo armazenar diferentes tipos de informações dentro de um mesmo documento. É
-   conhecido por sua escalabilidade e flexibilidade, sendo ideal para aplicações que lidam com grandes volumes de dados e precisam de rápida recuperação de informações.
+MongoDB é um banco de dados NoSQL, orientado a documentos, que armazena informações no formato de documentos JSON (JavaScript Object Notation). Ao contrário dos bancos de dados relacionais que usam tabelas e linhas, o MongoDB utiliza uma estrutura flexível de dados, permitindo armazenar diferentes tipos de informações dentro de um mesmo documento. É
+conhecido por sua escalabilidade e flexibilidade, sendo ideal para aplicações que lidam com grandes volumes de dados e precisam de rápida recuperação de informações.
 
 2. **Um pouco da história dos bancos de dados**
 
-   Os bancos de dados surgiram nos anos 1960 com sistemas baseados em arquivos, evoluindo para bancos relacionais nos anos 1970, que utilizam tabelas e colunas para organizar dados. Com o crescimento das necessidades de armazenamento e processamento, surgiram os bancos de dados NoSQL, como o MongoDB. O MongoDB organiza os dados usando **collections** (coleções) e **documents** (documentos), onde cada documento é um registro flexível no formato JSON. Isso permite armazenar informações complexas e com diferentes esquemas dentro de uma mesma coleção.
+Os bancos de dados surgiram nos anos 1960 com sistemas baseados em arquivos, evoluindo para bancos relacionais nos anos 1970, que utilizam tabelas e colunas para organizar dados. Com o crescimento das necessidades de armazenamento e processamento, surgiram os bancos de dados NoSQL, como o MongoDB. O MongoDB organiza os dados usando **collections** (coleções) e **documents** (documentos), onde cada documento é um registro flexível no formato JSON. Isso permite armazenar informações complexas e com diferentes esquemas dentro de uma mesma coleção.
 
 ![Group 8](https://github.com/user-attachments/assets/40574e5f-ac31-4373-877b-d53ecf77d782)
 
@@ -52,24 +52,26 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 # Seção 4 - CRUD
 
-- [CRUD no MongoDB](#indice-crud)
-  - [1. Create (Inserir)](#1-create-inserir)
-    - [Estrutura básica do comando](#estrutura-básica-do-comando)
-    - [Exemplo de uso do `insert()`](#exemplo-de-uso-do-insert)
-  - [2. Read (Ler)](#2-read-ler)
-    - [Estrutura básica do comando](#estrutura-básica-do-comando-1)
-    - [Exemplo de uso do `find()`](#exemplo-de-uso-do-find)
-    - [Usando `find()` com operadores](#usando-find-com-operadores)
-  - [3. Update (Atualizar)](#3-update-atualizar)
-    - [Estrutura básica do comando](#estrutura-básica-do-comando-2)
-    - [Operadores de Atualização no MongoDB](#operadores-de-atualização-no-mongodb)
-    - [Exemplos de uso do update no MongoDB](#exemplos-de-uso-do-update-no-mongodb)
-  - [4. Delete (Remover)](#4-delete-remover)
-    - [Estrutura básica do comando](#estrutura-básica-do-comando-3)
-    - [Exemplos de uso do `delete()`](#exemplos-de-uso-do-delete-no-mongodb)
-    - [Exemplo de remoção de collections com `drop()`](#exemplo-de-remoção-de-collections-com-drop)
+- [Introdução](#introdução)
+- [1. Create (Inserir)](#1-create-inserir)
+  - [Estrutura básica do comando](#estrutura-básica-do-comando)
+  - [Exemplo de uso do `insert()`](#exemplo-de-uso-do-insert)
+- [2. Read (Ler)](#2-read-ler)
+  - [Estrutura básica do comando](#estrutura-básica-do-comando-1)
+  - [Exemplo de uso do `find()`](#exemplo-de-uso-do-find)
+  - [Usando `find()` com operadores](#usando-find-com-operadores)
+- [3. Update (Atualizar)](#3-update-atualizar)
+  - [Estrutura básica do comando](#estrutura-básica-do-comando-2)
+  - [Operadores de Atualização no MongoDB](#operadores-de-atualização-no-mongodb)
+  - [Exemplos de uso do update no MongoDB](#exemplos-de-uso-do-update-no-mongodb)
+- [4. Delete (Remover)](#4-delete-remover)
+  - [Estrutura básica do comando](#estrutura-básica-do-comando-3)
+  - [Exemplos de uso do `delete()`](#exemplos-de-uso-do-delete-no-mongodb)
+  - [Exemplo de remoção de collections com `drop()`](#exemplo-de-remoção-de-collections-com-drop)
 - [Operadores de Comparação no MongoDB](#operadores-de-comparação-no-mongodb)
 - [Projections (Projeções)](#projections)
+
+## Introdução
 
 No MongoDB, CRUD é um acrônimo que representa as operações básicas de manipulação de dados:
 
@@ -92,11 +94,7 @@ abaixo.
 Comandos unicos são usados para atuar sobre documentos únicos, enquanto os múltiplos são usados para
 atuar sobre multiplos documentos de uma vez só. Vejamos como usar esses métodos para manipular nosso bando de dados.
 
-## **Importante!**
-
-Nos comandos abaixo, toda vez que encontrar a palavra "collection" após o comando "db" nos exemplos, você deve substituí-la pelo nome da coleção na qual você quer manipular.
-
----
+![alt text](<img/aviso mongo.png>)
 
 ## 1. **Create (Inserir)**
 

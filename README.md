@@ -73,9 +73,11 @@ abaixo.
 Comandos unicos são usados para atuar sobre documentos únicos, enquanto os múltiplos são usados para
 atuar sobre multiplos documentos de uma vez só. Vejamos como usar esses métodos para manipular nosso bando de dados.
 
-    **Importante!**
+## **Importante!**
 
-    Nos comandos abaixo, toda vez que encontrar a palavra "collection" após o comando "db" nos exemplos, você deve substituí-la pelo nome da coleção na qual você quer manipular.
+Nos comandos abaixo, toda vez que encontrar a palavra "collection" após o comando "db" nos exemplos, você deve substituí-la pelo nome da coleção na qual você quer manipular.
+
+---
 
 ## 1. **Create (Inserir)**
 
@@ -254,7 +256,7 @@ Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer prim
   db.collection.updateMany({}, { $rename: { sobrenome: "ultimoNome" } });
   ```
 * **Atualização com upsert**  
-  Se não existir um documento onde name seja "Igor", cria um novo documento com `idade: 30`.
+   Se não existir um documento onde name seja "Igor", cria um novo documento com `idade: 30`.
   `javascript
 db.collection.updateOne({ name: "Igor" }, { $set: { idade: 30 } }, { upsert: true })
 `

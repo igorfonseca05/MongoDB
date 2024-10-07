@@ -6,12 +6,12 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 ## Andamento do Curso
 
-![2](https://github.com/user-attachments/assets/8349fc16-2675-42d5-adf3-ef93b0927c4a)
+![seção 4](4.png)
 
 - [x] Seção 1: [Introdução](#seção-1---introdução)
 - [x] Seção 2: [Instalação](#seção-2---instalando-mongodb)
-- [ ] Seção 3: [Básico](#seção-3---básico)
-- [ ] Seção 4: [CRUD](#seção-4---crud)
+- [x] Seção 3: [Básico](#seção-3---básico)
+- [x] Seção 4: [CRUD](#seção-4---crud)
 - [ ] Seção 5: Modelagem e Relacionamentos
 - [ ] Seção 6: Schema e Validação
 - [ ] Seção 7: Algumas preparações para as consultas
@@ -58,8 +58,10 @@ Os bancos de dados surgiram nos anos 1960 com sistemas baseados em arquivos, evo
   - [Exemplo de uso do `insert()`](#exemplo-de-uso-do-insert)
 - [2. Read (Ler)](#2-read-ler)
   - [Estrutura básica do comando](#estrutura-básica-do-comando-1)
+  - [Operadores de Comparação no MongoDB](#operadores-de-comparação-no-mongodb)
   - [Exemplo de uso do `find()`](#exemplo-de-uso-do-find)
   - [Usando `find()` com operadores](#usando-find-com-operadores)
+  - [Projections (Projeções)](#projections)
 - [3. Update (Atualizar)](#3-update-atualizar)
   - [Estrutura básica do comando](#estrutura-básica-do-comando-2)
   - [Operadores de Atualização no MongoDB](#operadores-de-atualização-no-mongodb)
@@ -68,8 +70,6 @@ Os bancos de dados surgiram nos anos 1960 com sistemas baseados em arquivos, evo
   - [Estrutura básica do comando](#estrutura-básica-do-comando-3)
   - [Exemplos de uso do `delete()`](#exemplos-de-uso-do-delete-no-mongodb)
   - [Exemplo de remoção de collections com `drop()`](#exemplo-de-remoção-de-collections-com-drop)
-- [Operadores de Comparação no MongoDB](#operadores-de-comparação-no-mongodb)
-- [Projections (Projeções)](#projections)
 
 ## Introdução
 

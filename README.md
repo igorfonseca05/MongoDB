@@ -1,6 +1,8 @@
 ![header mongo](https://github.com/user-attachments/assets/7585844f-ee1a-4950-a1a4-ab0825611fc5)
 
-## Descrição
+<div style='color: red; font-size: 30px'>
+Descrição
+</div>
 
 Este repositório contém materiais e projetos relacionados aos meus estudos de MongoDB ministrado pelo professor **Renan Pallin**. Aqui, você encontrará exemplos de código, anotações e exercícios práticos que abrangem desde os conceitos básicos até tópicos avançados. O objetivo é consolidar o aprendizado e aplicar as melhores práticas no uso do MongoDB.
 
@@ -54,10 +56,10 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 No MongoDB, CRUD é um acrônimo que representa as operações básicas de manipulação de dados:
 
-- Create (Criar): Insere novos documentos em uma coleção.
-- Read (Ler): Consulta e recupera documentos existentes.
-- Update (Atualizar): Modifica dados de documentos existentes.
-- Delete (Excluir): Remove documentos de uma coleção.
+- **Create (Criar)**: Insere novos documentos em uma coleção.
+- **Read (Ler)**: Consulta e recupera documentos existentes.
+- **Update (Atualizar)**: Modifica dados de documentos existentes.
+- **Delete (Excluir)**: Remove documentos de uma coleção.
 
 Essas operações permitem gerenciar e interagir com os dados no banco de forma completa, além disso elas
 possuem variações que podem ser aplicadas para documentos únicos ou múltiplos como visto na tabela e exemplos
@@ -71,7 +73,15 @@ abaixo.
 | Delete   | `deleteOne()` | `deleteMany()` |
 
 Comandos unicos são usados para atuar sobre documentos únicos, enquanto os múltiplos são usados para
-atuar sobre multiplos documentos de uma vez só.
+atuar sobre multiplos documentos de uma vez só. Vejamos como usar esses métodos para manipular nosso bando de dados.
+
+<div style="color: red;">
+
+**Importante!**
+
+Nos comandos abaixo, toda vez que encontrar a palavra `collection` após o comando `db` nos exemplos, você deve substituí-la pelo nome da coleção na qual você quer manipular.
+
+</div>
 
 ## 1. **Create (Inserir)**
 
@@ -250,10 +260,10 @@ Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer prim
   db.collection.updateMany({}, { $rename: { sobrenome: "ultimoNome" } });
   ```
 * **Atualização com upsert**  
-  Se não existir um documento onde name seja "Igor", cria um novo documento com `idade: 30`.
+   Se não existir um documento onde name seja "Igor", cria um novo documento com `idade: 30`.
   `javascript
-  db.collection.updateOne({ name: "Igor" }, { $set: { idade: 30 } }, { upsert: true })
-  `
+db.collection.updateOne({ name: "Igor" }, { $set: { idade: 30 } }, { upsert: true })
+`
 
 * **Adicionar um Campo Se Não Existir ($setOnInsert)**  
   Usa o `upsert` para adicionar o campo cidade apenas quando um novo documento for inserido.

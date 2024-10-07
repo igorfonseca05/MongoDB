@@ -6,14 +6,14 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 ## Andamento do Curso
 
-![seção 4](img/4.png)
+![seção 6](img/6.png)
 
 - [x] Seção 1: [Introdução](#seção-1---introdução)
 - [x] Seção 2: [Instalação](#seção-2---instalando-mongodb)
 - [x] Seção 3: [Básico](#seção-3---básico)
 - [x] Seção 4: [CRUD](#seção-4---crud)
-- [ ] Seção 5: [Modelagem e Relacionamentos](#seção-4---modelagem-e-relacionamentos)
-- [ ] Seção 6: Schema e Validação
+- [x] Seção 5: [Modelagem e Relacionamentos](#seção-4---modelagem-e-relacionamentos)
+- [x] Seção 6: [Schema e Validação](#seção-5---schema-e-validation)
 - [ ] Seção 7: Algumas preparações para as consultas
 - [ ] Seção 8: Consultas! Vamos buscar nossos dados!
 - [ ] Seção 9: Consultas | Combinando operadores e se aprofundando
@@ -49,6 +49,30 @@ Os bancos de dados surgiram nos anos 1960 com sistemas baseados em arquivos, evo
 4. Finalize a instalação.
 
 # Seção 3 - Básico
+
+No MongoDB, podemos facilmente criar bancos de dados, coleções e visualizar suas estruturas com alguns comandos básicos. Vamos explorar como iniciar o serviço MongoBD na nossa maquina e realizar essas operações usando exemplos práticos.
+
+## Iniciando o MongoDB
+
+Uma vez instalado o programa na máquina, devemos agora iniciar o serviço do MongoDB. Com o terminal so windows aberto ou no terminal do VSCode, digite:
+
+    mongo
+
+Muito provavelmente se você acabou de instalar o mongoDB, verá uma tela de Log com algumas informações e um aviso de falha na conexão. Isso por agora é normal e ocorre porque o comando `mongo` que representa um cliente (usuário que quer consumir os seviços MongoDB), tenta por padrão se conectar ao serviços do banco de dados no servidor local (seu computador) por meio da `String de conexão`
+
+    mongo://127.0.0.1:27017
+
+onde o `127.0.0.1` representa o computador que estamos usando (localhost) e o `27017` é a porta padrão no qual o mongo tenta se conectar. Ao tentar a conexão, como não existe nenhum servidor do MongoDB rodando em seu computador (ainda), nos é retornado o erro.
+
+Se tentarmos iniciar o servidor MongoDB na nossa máquina digitando no terminal o comando:
+
+    mongod
+
+também teremos um error, que agora ocorre pois não existe um **path** apontando para o diretório `/data/db`, que é onde o mongoDB armazena os bancos de dados e coleções que adicionamos.
+
+## Criar Banco de Dados no MongoDB
+
+Diferente de bancos relacionais, onde criamos uma tabela que fica na base de dados até que algum dado seja adicionado nela, no MongoDB isso não acontence, pois o banco de dados só é criado no momento em que adicionamos um dado a ele. Para criar um BD no MongoDB, digitamos no CMD
 
 # Seção 4 - CRUD
 
@@ -532,5 +556,54 @@ No MongoDB, as estratégias de modelagem se dividem em duas abordagens principai
   ]
 }
 ```
+
+# Seção 5 - Schema e Validation
+
+O MongoDB é um banco de dados NoSQL, conhecido por sua flexilibilidade na adição de documentos com diferentes formatos em diferentes coleções. Essa flexibilidade pode levar a inconsistências caso não haja nenhum tipo de controle dos dados que estão sendo inseridos no banco. Pensando justamente em solucionar esse problema, o MongoDB introduziu o conceito de **Schema Validation**, que nos permite definir regras que garatam a integridade dos dados.
+
+## O que é um Schema?
+
+No contexto do MongoDB, um **schema** é um conjunto de regras e restrições que define como os documentos devem ser estruturados em uma coleção. Ele especifica quais campos são obrigatórios, os tipos de dados permitidos, restrições nos valores e até mesmo o formato dos dados, garantindo que cada documento inserido ou atualizado atenda a esses critérios.
+
+Com o **Schema validation** podemos:
+
+- **Definir tipos de dados**: Garantir que um campo dentro de um documento sejá `String`, `number`, `boolean` e etc.
+
+- **Estabelecer campos obrigatórios**: Definir quais campos devem estar obrigatóriamente presentes nos documentos
+
+- **Restringir valores**: Por exemplo, validar que um idade seja maior que zero.
+
+- **Validar estruturas complexas**: Como validar arrays ou subdocumentos
+
+## Como utilizar o Schema Validation
+
+<!--
+```javascript
+db.createCollection("students", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         title: "Student Object Validation",
+         required: [ "address", "major", "name", "year" ],
+         properties: {
+            name: {
+               bsonType: "string",
+               description: "'name' must be a string and is required"
+            },
+            year: {
+               bsonType: "int",
+               minimum: 2017,
+               maximum: 3017,
+               description: "'year' must be an integer in [ 2017, 3017 ] and is required"
+            },
+            gpa: {
+               bsonType: [ "double" ],
+               description: "'gpa' must be a double if the field exists"
+            }
+         }
+      }
+   }
+} )
+``` -->
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

@@ -54,21 +54,68 @@ No MongoDB, podemos facilmente criar bancos de dados, coleções e visualizar su
 
 ## Iniciando o MongoDB
 
-Uma vez instalado o programa na máquina, devemos agora iniciar o serviço do MongoDB. Com o terminal so windows aberto ou no terminal do VSCode, digite:
+Uma vez instalado o programa na máquina, devemos agora iniciar o serviço do MongoDB. Com o terminal do windows aberto ou no terminal do VSCode, digite:
 
     mongo
 
-Muito provavelmente se você acabou de instalar o mongoDB, verá uma tela de Log com algumas informações e um aviso de falha na conexão. Isso por agora é normal e ocorre porque o comando `mongo` que representa um cliente (usuário que quer consumir os seviços MongoDB), tenta por padrão se conectar ao serviços do banco de dados no servidor local (seu computador) por meio da `String de conexão`
+Muito provavelmente se você acabou de instalar o mongoDB, verá uma tela de log com algumas informações e um aviso de falha na conexão. Isso ocorre porque o comando `mongo` que representa um cliente (usuário que quer consumir os seviços MongoDB), tenta por padrão, se conectar ao serviços do banco de dados no servidor MongoDB local (seu computador) por meio da `String de conexão`
 
     mongo://127.0.0.1:27017
 
 onde o `127.0.0.1` representa o computador que estamos usando (localhost) e o `27017` é a porta padrão no qual o mongo tenta se conectar. Ao tentar a conexão, como não existe nenhum servidor do MongoDB rodando em seu computador (ainda), nos é retornado o erro.
 
-Se tentarmos iniciar o servidor MongoDB na nossa máquina digitando no terminal o comando:
+Se ao contrário do que fizemos anteriormente, tentarmos iniciar o servidor MongoDB( responsável pelas funcinalidades do programa) na nossa máquina digitando no terminal o comando (que representa o servidor):
 
     mongod
 
-também teremos um error, que agora ocorre pois não existe um **path** apontando para o diretório `/data/db`, que é onde o mongoDB armazena os bancos de dados e coleções que adicionamos.
+também teremos um error, que agora ocorre pois não existe um **path** apontando para o diretório `/data/db`, que é o caminho dentro da nossa máquina onde o servidor mongoDB armazena os dados que adicionaremos dentro de nossas modelagens e aplicações.
+
+Para resolver esse problema precisamos criar, caso ela não exista, a pasta `data` no seu computador. Pode ser em qualquer camminho dentro de sua máquina, porém o mongo sempre opta por criar na raiz `C:/` dentro do windows e você pode manter esse padrão se quiser, é o que farei aqui. Para isso no terminal, digite:
+
+    mkdir data
+
+onde `mkdir` é o comando dentro do windows que usamos para criar uma nova pasta e o `data` é o nome da pasta. Importante destacar é preciso estar atento ao caminho mostrado no terminal. Se eu digitasse o código abaixo no terminal:
+
+![alt text](image.png)
+
+a pasta `data` seria criada dentro de `C:\users\Igor\Documentos\Repositórios\MongoDB`, e isso não é o que queremos. Para isso usamos o comando
+
+    cd..
+
+para descer os níveis dentro do diretório, de modo que no usando `cd..` no caminho mostrado acima teriamos:
+
+    C:\users\Igor\Documentos\Repositórios
+
+fazendo isso continuamente, chagariamos em na raiz `C:`, nesse caminho usamos o `mkdir`.
+
+Feito isso teremos uma pasta criada na raiz, e agora mostraremos ao mongo onde ela está usando o comando:
+
+    mongod --dbpath C:\data
+
+quando clicar no `enter`, será mostrado muitos logs onde um deles nos mostra que o servidor mongo foi iniciado e está esperando por conexões na porta padrão.
+
+![alt text](img/coneão.png.png)
+
+Agora se voltarmos ao terminal e digitarmos:
+
+    mongo
+
+novamente, teremos acesso a todos os serviços do MongoDB.
+
+Para facilitar o entendimento do que foi explicado acima, veja a imagem abaixo e leia a descrição da imagem.
+
+![alt text](<img/imagem mongo.png>)
+
+- **Mongod**:
+
+  - **O mongod** é o servidor do MongoDB. Ele é responsável por gerenciar a base de dados, armazenar os dados, processar operações de leitura e escrita e lidar com a comunicação com o cliente.
+  - O mongod precisa estar em execução para que qualquer operação no banco de dados ocorra. Ele escuta conexões na porta padrão (27017) ou outra especificada.
+
+- **Mongo**:
+
+  - O **mongo** é um cliente de linha de comando que se conecta ao mongod.
+  - Através do cliente `mongo`, você pode interagir com o servidor para executar comandos como criar bancos de dados, visualizar coleções, consultar documentos, e assim por diante.
+  - Ele atua como uma interface para enviar instruções ao mongod e obter respostas.
 
 ## Criar Banco de Dados no MongoDB
 

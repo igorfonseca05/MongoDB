@@ -155,7 +155,9 @@ db.collection.update( <filtro>, <atualização> ,<opções> )
 ```
 
 - `<Filtro>`: Critério para selecionar o(s) documento(s)
-- `<atualização>`: Especifica as alterações a serem feitas \*`<opções>`: Parâmetros opcionais, como `upsert` ou `multi`
+- `<atualização>`: Especifica as alterações a serem feitas
+
+* `<opções>`: Parâmetros opcionais, como `upsert` ou `multi`
 
 Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer primeiro alguns operadores de atualização do mongoDB. Na tabela abaixo podemos ver quais são eles, uma breve descrição sobre como atuam e um exemplo de como usá-los.
 

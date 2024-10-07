@@ -28,12 +28,12 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 # Seção 1 - Introdução
 
-.1. **O que é o MongoBD ?**
+## **O que é o MongoBD ?**
 
 MongoDB é um banco de dados NoSQL, orientado a documentos, que armazena informações no formato de documentos JSON (JavaScript Object Notation). Ao contrário dos bancos de dados relacionais que usam tabelas e linhas, o MongoDB utiliza uma estrutura flexível de dados, permitindo armazenar diferentes tipos de informações dentro de um mesmo documento. É
 conhecido por sua escalabilidade e flexibilidade, sendo ideal para aplicações que lidam com grandes volumes de dados e precisam de rápida recuperação de informações.
 
-2. **Um pouco da história dos bancos de dados**
+## Um pouco da história dos bancos de dados
 
 Os bancos de dados surgiram nos anos 1960 com sistemas baseados em arquivos, evoluindo para bancos relacionais nos anos 1970, que utilizam tabelas e colunas para organizar dados. Com o crescimento das necessidades de armazenamento e processamento, surgiram os bancos de dados NoSQL, como o MongoDB. O MongoDB organiza os dados usando **collections** (coleções) e **documents** (documentos), onde cada documento é um registro flexível no formato JSON. Isso permite armazenar informações complexas e com diferentes esquemas dentro de uma mesma coleção.
 
@@ -94,7 +94,11 @@ abaixo.
 Comandos unicos são usados para atuar sobre documentos únicos, enquanto os múltiplos são usados para
 atuar sobre multiplos documentos de uma vez só. Vejamos como usar esses métodos para manipular nosso bando de dados.
 
-![alt text](<img/aviso mongo.png>)
+## Aviso ⚠️
+
+    Nos comandos abaixo, toda vez que encontrar a palavra "collection" após o comando "db" nos exemplos, você deve substituí-la pelo nome da coleção na qual você quer manipular.
+
+---
 
 ## 1. **Create (Inserir)**
 
@@ -391,7 +395,7 @@ Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer prim
   );
   ```
 
-  Importante destacar que todos os exemplos e operadores mostrados acima podem ser usados tantos com `updateOne` quando com o `updateMany`.
+Importante destacar que todos os exemplos e operadores mostrados acima podem ser usados tantos com `updateOne` quando com o `updateMany`.
 
 ## 3. Delete (Remover)
 
@@ -434,7 +438,11 @@ Podemos usar qualquer um dos operadores mostrados na tabela de operadores acima 
 
 Usamos o comando `delete` a nivel de documentos. Como fazemos então para remover uma **collection** inteira de uma vez só da base de dados? Para isso usamos o `drop()`!
 
-**Importante**: Os comandos de deletar devem ser usados com cautela, pois uma vez removido os documentos e collections não é possível recuperá-los.
+## Aviso ⚠️
+
+Os comandos de deletar devem ser usados com cautela, pois uma vez removido os documentos e collections não é possível recuperá-los.
+
+---
 
 ### Exemplo de remoção de collections com `drop()`
 

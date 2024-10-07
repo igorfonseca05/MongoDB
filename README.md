@@ -371,9 +371,14 @@ Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer prim
   ```
 * **Atualização com upsert**  
    Se não existir um documento onde name seja "Igor", cria um novo documento com `idade: 30`.
-  `javascript
-db.collection.updateOne({ name: "Igor" }, { $set: { idade: 30 } }, { upsert: true })
-`
+
+  ```javascript
+  db.collection.updateOne(
+    { name: "Igor" },
+    { $set: { idade: 30 } },
+    { upsert: true }
+  );
+  ```
 
 * **Adicionar um Campo Se Não Existir ($setOnInsert)**  
   Usa o `upsert` para adicionar o campo cidade apenas quando um novo documento for inserido.

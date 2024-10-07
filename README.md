@@ -96,7 +96,7 @@ atuar sobre multiplos documentos de uma vez só. Vejamos como usar esses método
 
 ## Aviso ⚠️
 
-    Nos comandos abaixo, toda vez que encontrar a palavra "collection" após o comando "db" nos exemplos, você deve substituí-la pelo nome da coleção na qual você quer manipular.
+Nos comandos abaixo, toda vez que encontrar a palavra "collection" após o comando "db" nos exemplos, você deve substituí-la pelo nome da coleção na qual você quer manipular.
 
 ---
 
@@ -476,14 +476,14 @@ Embora não possua chaves estrangeiras como bancos relacionais, o MongoDB suport
 2.  **Relação um-para-Muitos** (1)
 
 - Um documento A está relacionado a muitos documentos B.
-- **Exemplos**: Autor e posts de blog, cliente e pedidos de compra.
+- **Exemplos**: Setor e funcionários de uma empresa.
 
   ![alt text](img/1n.png)
 
 3. **Relação Muitos-para-Muitos(N)**
 
 - Muitos documentos A estão relacionados a muitos documentos B.
-- **Exemplos**: Estudantes e cursos, usuários e grupos.
+- **Exemplos**: Fornecedor e produto
 
   ![alt text](img/nn.png)
 

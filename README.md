@@ -12,7 +12,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 - [x] Seção 2: [Instalação](#seção-2---instalando-mongodb)
 - [x] Seção 3: [Básico](#seção-3---básico)
 - [x] Seção 4: [CRUD](#seção-4---crud)
-- [ ] Seção 5: Modelagem e Relacionamentos
+- [ ] Seção 5: [Modelagem e Relacionamentos](#seção-4---modelagem-e-relacionamentos)
 - [ ] Seção 6: Schema e Validação
 - [ ] Seção 7: Algumas preparações para as consultas
 - [ ] Seção 8: Consultas! Vamos buscar nossos dados!
@@ -452,6 +452,33 @@ db.users.drop();
 ```
 
 - No exemplo acima, a coleção users será completamente removida do banco de dados, incluindo todos os documentos e o esquema associado a ela.
-- Se a coleção não existir, o comando drop() retornará false. Caso a coleção exista e seja removida com sucesso, o comando retornará true.
+- Se a coleção não existir, o comando `drop()` retornará **false**. Caso a coleção exista e seja removida com sucesso, o comando retornará **true**.
+
+# Seção 4 - Modelagem e Relacionamentos
+
+No MongoDB, a modelagem de dados e os relacionamentos entre documentos são conceitos fundamentais para se construir uma aplicação eficiente e performática. Ao contrário dos bancos de dados relacionais, que utilizam tabelas e chaves estrangeiras para estabelecer relações, o MongoDB adota um modelo de dados flexível, baseado em documentos, que oferece diversas abordagens para representar relacionamentos. Essa flexibilidade permite que os dados sejam modelados de acordo com as necessidades específicas de cada aplicação, promovendo consultas mais rápidas e uma estrutura mais fácil de ser evoluída.
+
+## Por que Modelagem é Importante?
+
+Modelar dados corretamente é essencial para garantir a performance e a escalabilidade de uma aplicação. Um bom design de esquema evita consultas pesadas, otimiza o uso de memória e simplifica a manutenção da base de dados. Por isso, a escolha de como armazenar e relacionar documentos depende de entender os tipos de operações que serão realizadas e o comportamento esperado dos dados.
+
+## Tipos de Relacionamentos no MongoDB
+
+Embora não possua chaves estrangeiras como bancos relacionais, o MongoDB suporta diferentes tipos de relacionamentos usando referências (referencing) ou embutimento (embedding). Os principais tipos são:
+
+1. **Relação Um-para-Um** (1:1)
+
+- Um documento A está relacionado a apenas um documento B e vice-versa.
+- **Exemplos**: Perfil de usuário e configurações do usuário, documentos que compartilham uma identificação única.
+
+2.  **Relação um-para-Muitos** (1)
+
+- Um documento A está relacionado a muitos documentos B.
+- **Exemplos**: Autor e posts de blog, cliente e pedidos de compra.
+
+3. **Relação Muitos-para-Muitos(N)**
+
+- Muitos documentos A estão relacionados a muitos documentos B.
+- **Exemplos**: Estudantes e cursos, usuários e grupos.
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

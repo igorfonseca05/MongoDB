@@ -26,7 +26,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 ---
 
-### Seção 1 - Introdução
+# Seção 1 - Introdução
 
 1. **O que é o MongoBD ?**
 
@@ -39,7 +39,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 ![Group 8](https://github.com/user-attachments/assets/40574e5f-ac31-4373-877b-d53ecf77d782)
 
-### Seção 2 - Instalando MongoDB
+# Seção 2 - Instalando MongoDB
 
 #### Windows:
 
@@ -48,9 +48,9 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 3. Opte por instalar como serviço (opção recomendada) e defina o diretório padrão de dados (C:\Program Files\MongoDB\Server\<versão>).
 4. Finalize a instalação.
 
-### Seção 3 - Básico
+# Seção 3 - Básico
 
-### Seção 4 - CRUD
+# Seção 4 - CRUD
 
 No MongoDB, CRUD é um acrônimo que representa as operações básicas de manipulação de dados:
 
@@ -73,7 +73,17 @@ abaixo.
 Comandos unicos são usados para atuar sobre documentos únicos, enquanto os múltiplos são usados para
 atuar sobre multiplos documentos de uma vez só.
 
-### 1. **Create (Inserir)**
+## 1. **Create (Inserir)**
+
+A operação `insert` adiciona novos documentos a uma coleção.
+
+### **Estrutura básica do comando**
+
+```javascript
+db.collection.insert({ key: value });
+```
+
+### **Exemplo de uso do `insert()`**
 
 - **`insertOne()`**: Insere um único documento.
 
@@ -92,9 +102,43 @@ atuar sobre multiplos documentos de uma vez só.
 
   Ao executar os comandos acima, os itens serão inseridos no banco de dados. Agora vamos aprender a recuperar dados para que possamos visualizar as inserções de dados.
 
-### 2. Read (Ler)
+## 2. Read (Ler)
 
-- **`findOne`**: Busca um único documento
+A operação `find` é usada para ler e recuperar documentos de uma coleção com base em critérios de pesquisa.
+
+### **Estrutura básica do comando**
+
+```javascript
+db.collection.find(<filtro>, <projeção>)
+```
+
+- `<filtro>` Especifica quais campos devem ser incluídos ou excluídos (opcional)
+- `<projeção>`: // Especifica quais campos devem ser incluídos ou excluídos (opcional) (Leia sobre Projeção [Aqui](#projections))
+
+Antes de continuar entendendo como usamos o método `Read()`, precisamos conhecer alguns operações que podem ser utilizados para filtrar as buscas no banco.
+
+### **Operadores de Comparação no MongoDB**
+
+| **Operador** | **Descrição**                                                                              | **Exemplo de Uso**                                |
+| ------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| `$eq`        | Seleciona documentos onde o campo é igual a um valor específico.                           | `{ idade: { $eq: 25 } }`                          |
+| `$ne`        | Seleciona documentos onde o campo **não** é igual a um valor.                              | `{ idade: { $ne: 25 } }`                          |
+| `$gt`        | Seleciona documentos onde o campo é maior que um valor.                                    | `{ idade: { $gt: 30 } }`                          |
+| `$gte`       | Seleciona documentos onde o campo é maior ou igual a um valor.                             | `{ idade: { $gte: 30 } }`                         |
+| `$lt`        | Seleciona documentos onde o campo é menor que um valor.                                    | `{ idade: { $lt: 20 } }`                          |
+| `$lte`       | Seleciona documentos onde o campo é menor ou igual a um valor.                             | `{ idade: { $lte: 20 } }`                         |
+| `$in`        | Seleciona documentos onde o campo possui um valor contido em uma lista.                    | `{ idade: { $in: [20, 25, 30] } }`                |
+| `$nin`       | Seleciona documentos onde o campo **não** possui um valor contido em uma lista.            | `{ idade: { $nin: [20, 25, 30] } }`               |
+| `$exists`    | Seleciona documentos onde o campo especificado existe (`true`) ou não existe (`false`).    | `{ sobrenome: { $exists: true } }`                |
+| `$type`      | Seleciona documentos onde o campo possui um tipo de dado específico (ex: `string`, `int`). | `{ idade: { $type: "int" } }`                     |
+| `$regex`     | Seleciona documentos onde o valor do campo corresponde a uma expressão regular (regex).    | `{ nome: { $regex: "^Igor", $options: "i" } }`    |
+| `$size`      | Seleciona documentos onde um campo de array possui um tamanho específico.                  | `{ cursos: { $size: 3 } }`                        |
+| `$all`       | Seleciona documentos onde um campo de array contém todos os elementos especificados.       | `{ tags: { $all: ["React", "Node"] } }`           |
+| `$elemMatch` | Seleciona documentos onde pelo menos um elemento em um array corresponde a uma condição.   | `{ notas: { $elemMatch: { $gte: 8, $lt: 10 } } }` |
+
+### **Exemplo de uso do `Read()`**
+
+- **`FindOne()`**: Busca um único documento
 
   ```javascript
   db.collection.findOne({ nome: "João" });
@@ -118,7 +162,7 @@ atuar sobre multiplos documentos de uma vez só.
 
   ***
 
-  ### Projections
+  ## Projections
 
   No MongoDB, projections são usadas para especificar quais campos de um documento devem ser incluídos ou excluídos nos resultados de uma consulta. Em outras palavras, as projeções permitem que você controle exatamente quais partes dos documentos serão retornadas, melhorando a performance ao evitar o retorno de dados desnecessários.  
    Para usar projections e filtrar quais campos do documento queremos ver devemos usar a sintax abaixo:
@@ -144,11 +188,11 @@ atuar sobre multiplos documentos de uma vez só.
 
   ![alt text](img/image-3.png)
 
-### 3. Update (atualizar)
+## 3. Update (atualizar)
 
 Usamos o método update para atualizar dados já inseridos dentro da base, para isso usamos o `updateOne()` ou o `updateMany()`, que pode ser usado simplesmente como `update()`.
 
-**Estrutura básica do comando**
+### **Estrutura básica do comando**
 
 ```javascript
 db.collection.update( <filtro>, <atualização> ,<opções> )
@@ -161,7 +205,7 @@ db.collection.update( <filtro>, <atualização> ,<opções> )
 
 Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer primeiro alguns operadores de atualização do mongoDB. Na tabela abaixo podemos ver quais são eles, uma breve descrição sobre como atuam e um exemplo de como usá-los.
 
-**Operadores de Atualização no MongoDB**
+### **Operadores de Atualização no MongoDB**
 
 | **Operador**   | **Descrição**                                                                                  | **Exemplo de Uso**                            |
 | -------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------- |
@@ -178,7 +222,7 @@ Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer prim
 | `$max`         | Atualiza o campo apenas se o valor especificado for maior que o valor atual.                   | `{ $max: { idade: 30 } }`                     |
 | `$min`         | Atualiza o campo apenas se o valor especificado for menor que o valor atual.                   | `{ $min: { idade: 20 } }`                     |
 
-**Comandos mais comuns no MongoDB**
+### **Exemplos de uso do update no MongoDB**
 
 - **`UpdateOne`**: Atualiza um único documento
 
@@ -192,18 +236,65 @@ Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer prim
   db.collection.updateMany({ name: "Aline" }, { $set: { idade: 28 } });
   ```
 
-### 4. Delete (Deletar)
+  Usando os métodos acima podemos ainda fazer outros tipo de atualizações, como remover, renomear, incremanentar e etc
 
-- **`DeleteOne`**: Deleta um único documento
+* **Remover campos**
+  ```javascript
+  db.collection.updateMany(
+    { idade: { $gte: 25 } },
+    { $unset: { sobrenome: "" } }
+  );
+  ```
+* **Renomear um Campo**
+  ```javascript
+  db.collection.updateMany({}, { $rename: { sobrenome: "ultimoNome" } });
+  ```
+* **Atualização com upsert**  
+  Se não existir um documento onde name seja "Igor", cria um novo documento com `idade: 30`.
+  `javascript
+  db.collection.updateOne({ name: "Igor" }, { $set: { idade: 30 } }, { upsert: true })
+  `
+
+* **Adicionar um Campo Se Não Existir ($setOnInsert)**  
+  Usa o `upsert` para adicionar o campo cidade apenas quando um novo documento for inserido.
 
   ```javascript
-  db.collection.deleteOne({ nome: "João" });
+  db.collection.updateOne(
+    { name: "Aline" },
+    { $setOnInsert: { cidade: "São Paulo" } },
+    { upsert: true }
+  );
   ```
 
-- **`DeleteMany()`**: Atualiza múltiplos documentos
+  Importante destacar que todos os exemplos e operadores mostrados acima podem ser usados tantos com `updateOne` quando com o `updateMany`.
+
+## 3. Delete (Remover)
+
+Usamos o método `delete` para remover documentos de uma coleção. Existem duas formas principais para remover documentos: `deleteOne()` e `deleteMany()`, que funcionam de maneira semelhante ao `remove()`.
+
+### **Estrutura básica do comando**
+
+```javascript
+db.collection.delete( <filtro> ,<opções> )
+```
+
+- `<filtro>`: Critério para selecionar o(s) documento(s) a serem removidos.
+- `<opções>`: Parâmetros opcionais que podem modificar o comportamento da remoção, como writeConcern (confirmação de gravação) e collation (regras de comparação).
+
+### Exemplos de uso do delete no MongoDB
+
+- `deleteOne()`: Remove um único documento que corresponde ao filtro especificado.
 
   ```javascript
-  db.collection.deleteMany({ idade: { $lt: 30 } }); // Remove todos os usuários com idade menor que 30
+  db.collection.deleteOne({ name: "Igor" });
   ```
 
-  ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)
+  Esse comando remove apenas o primeiro documento que satisfaz o critério `{ name: "Igor" }`.
+
+- `deleteMany()`: Remove todos os documentos que correspondem ao filtro.
+
+  ```javascript
+  db.collection.deleteMany({ cidade: "São Paulo" });
+  ```
+
+![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

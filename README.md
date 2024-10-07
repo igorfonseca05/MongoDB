@@ -118,10 +118,10 @@ A operação `find` é usada para ler e recuperar documentos de uma coleção co
 db.collection.find(<filtro>, <projeção>)
 ```
 
-- `<filtro>` Especifica quais campos devem ser incluídos ou excluídos (opcional)
-- `<projeção>`: // Especifica quais campos devem ser incluídos ou excluídos (opcional) (Leia sobre Projeção [Aqui](#projections))
+- `<filtro>`: Especifica quais campos devem ser incluídos ou excluídos (opcional)
+- `<projeção>`: Especifica quais campos devem ser incluídos ou excluídos (opcional) (Leia sobre Projeção [Aqui](#projections))
 
-Antes de continuar entendendo como usamos o método `Read()`, precisamos conhecer alguns operações que podem ser utilizados para filtrar as buscas no banco.
+Antes de continuar entendendo como usamos o método `find()`, precisamos conhecer alguns operadores que podem ser utilizados para filtrar as buscas no banco.
 
 ### **Operadores de Comparação no MongoDB**
 
@@ -142,7 +142,7 @@ Antes de continuar entendendo como usamos o método `Read()`, precisamos conhece
 | `$all`       | Seleciona documentos onde um campo de array contém todos os elementos especificados.       | `{ tags: { $all: ["React", "Node"] } }`           |
 | `$elemMatch` | Seleciona documentos onde pelo menos um elemento em um array corresponde a uma condição.   | `{ notas: { $elemMatch: { $gte: 8, $lt: 10 } } }` |
 
-### **Exemplo de uso do `Read()`**
+### **Exemplo de uso do `find()`**
 
 - **`FindOne()`**: Busca um único documento
 
@@ -153,46 +153,143 @@ Antes de continuar entendendo como usamos o método `Read()`, precisamos conhece
 - **`Find()`**: Busca múltiplos documentos
 
   ```javascript
-  db.collection.find({ idade: { $gte: 25 } });
+  db.collection.find({ idade: 25 });
   ```
 
-  No último exemplo acima vemos o uso de operadores que, no **MongoDB**, são usados em operações que
-  nos permitem filtrar as buscas entre intervalos(operadores de comparação), verificar se determinado campo existe(**operador de existência**) em algum documento dentro do banco e muitos outros que veremos com detalhes.
+### Usando `find()` com operadores.
+
+- `$eq` (igual a)
 
   ```javascript
-  db.collection.find({ especial: { $exist: true } });
+  db.collection.find({ idade: { $eq: 25 } });
   ```
 
-  no codigo acima, usando o operador operador de existência,
-  buscamos pelo campo "especial", caso exista algum documento que atenda a busca ele será retornado como resultado.
+  _Seleciona documentos onde a idade é exatamente 25._
 
-  ***
-
-  ## Projections
-
-  No MongoDB, projections são usadas para especificar quais campos de um documento devem ser incluídos ou excluídos nos resultados de uma consulta. Em outras palavras, as projeções permitem que você controle exatamente quais partes dos documentos serão retornadas, melhorando a performance ao evitar o retorno de dados desnecessários.  
-   Para usar projections e filtrar quais campos do documento queremos ver devemos usar a sintax abaixo:
+- `$ne` (não igual a)
 
   ```javascript
-  db.collection.find({ query }, { projections });
+  db.collection.find({ idade: { $ne: 25 } });
   ```
 
-  Onde a seleção dos campos que derão ser mostrados na busca será dada por **0 / false** para não mostrar determinado campo e **1 / true** para mostrar o campo. Vejam o exemplo abaixo e o resultado da busca:
+  _Seleciona documentos onde a idade não é 25._
+
+- `$gt` (maior que)
 
   ```javascript
-  db.collection.find(
-    { name: "Aline" },
-    { _id: 0, name: 1, idade: 1, sobrenome: 0 }
-  );
+  db.collection.find({ idade: { $gt: 30 } });
   ```
 
-  na query acima, buscamos os documentos que contenham o nome "Aline" dentro de nossa base, selecionando os campos `name`, `idade` para serem mostrados e o `_id` e `sobrenome` para serem ocultados no retorno. Se existirem documentos dentro da base como:
+  _Seleciona documentos onde a idade é maior que 30._
 
-  ![alt text](img/image.png)
+- `$gte` (maior ou igual a)
 
-  o resultado do busca com o uso de projections será:
+  ```javascript
+  db.collection.find({ idade: { $gte: 30 } });
+  ```
 
-  ![alt text](img/image-3.png)
+  _Seleciona documentos onde a idade é maior ou igual a 30._
+
+- `$lt` (menor que)
+
+  ```javascript
+  db.collection.find({ idade: { $lt: 20 } });
+  ```
+
+  _Seleciona documentos onde a idade é menor que 20._
+
+- `$lte` (menor ou igual a)
+
+  ```javascript
+  db.collection.find({ idade: { $lte: 20 } });
+  ```
+
+  _Seleciona documentos onde a idade é menor ou igual a 20._
+
+- `$in` (dentro de um conjunto)
+
+  ```javascript
+  db.collection.find({ idade: { $in: [20, 25, 30] } });
+  ```
+
+  _Seleciona documentos onde a idade é 20, 25 ou 30._
+
+- `$nin` (não dentro de um conjunto)
+
+  ```javascript
+  db.collection.find({ idade: { $nin: [20, 25, 30] } });
+  ```
+
+  _Seleciona documentos onde a idade não é 20, 25 ou 30._
+
+- `$exists` (existe)
+
+  ```javascript
+  db.collection.find({ sobrenome: { $exists: true } });
+  ```
+
+  _Seleciona documentos onde o campo `sobrenome` existe._
+
+- `$type` (tipo)
+
+  ```javascript
+  db.collection.find({ idade: { $type: "int" } });
+  ```
+
+  _Seleciona documentos onde o campo `idade` é do tipo inteiro._
+
+- `$regex` (expressão regular)
+
+  ```javascript
+  db.collection.find({ nome: { $regex: "^Igor", $options: "i" } });
+  ```
+
+  _Seleciona documentos onde o campo `nome` começa com "Igor" (case-insensitive)._
+
+- `$size` (tamanho de array)
+
+  ```javascript
+  db.collection.find({ cursos: { $size: 3 } });
+  ```
+
+  *Seleciona documentos onde o campo `cursos` possui exatamente 3 eleme*ntos.
+
+- `$all` (contém todos os elementos especificados)
+
+  ```javascript
+  db.collection.find({ tags: { $all: ["React", "Node"] } });
+  ```
+
+  *Seleciona documentos onde o campo `tags` contém ambos os valores "Re*act" e "Node".
+
+- `$elemMatch` (correspondência dentro de um array)
+
+  ```javascript
+  db.collection.find({ notas: { $elemMatch: { $gte: 8, $lt: 10 } } });
+  ```
+
+  _Seleciona documentos onde pelo menos um elemento no array `notas` é maior ou igual a 8 e menor que 10._
+
+## Projections
+
+No MongoDB, projections são usadas para especificar quais campos de um documento devem ser incluídos ou excluídos nos resultados de uma consulta. Em outras palavras, as projeções permitem que você controle exatamente quais partes dos documentos serão retornadas, melhorando a performance ao evitar o retorno de dados desnecessários.
+
+A seleção dos campos que serão exibidos na busca é feita utilizando **0 / false** para ocultar um campo e **1 / true** para exibi-lo. Veja o exemplo abaixo e o resultado da busca:
+
+```javascript
+db.collection.find(
+  { name: "Aline" },
+  { _id: 0, name: 1, idade: 1, sobrenome: 0 }
+);
+```
+
+Na query acima, buscamos os documentos que contenham o nome "Aline" dentro de nossa base, selecionando os campos `name`, `idade` para serem mostrados e o `_id` e `sobrenome` para serem ocultados no retorno. Se existirem documentos dentro da base como:
+
+![alt text](img/image.png)
+
+o resultado do busca com o uso do projection mostrado acima será:
+
+![alt text](img/image-3.png)
 
 ## 3. Update (atualizar)
 

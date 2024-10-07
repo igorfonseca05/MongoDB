@@ -136,10 +136,10 @@ atuar sobre multiplos documentos de uma vez só.
 
   na query acima, buscamos os documentos que contenham o nome "Aline" dentro de nossa base, selecionando os campos `name`, `idade` para serem mostrados e o `_id` e `sobrenome` para serem ocultados no retorno. Se existirem documentos dentro da base como:
 
-  ![alt text](image.png)
+  ![alt text](img/image.png)
   o resultado do busca com o uso de projections será:
 
-  ![alt text](image-3.png)
+  ![alt text](img/image-3.png)
 
 ### 2. Delete (Deletar)
 

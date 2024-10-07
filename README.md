@@ -90,6 +90,8 @@ atuar sobre multiplos documentos de uma vez só.
   ]);
   ```
 
+  Ao executar os comandos acima, os itens serão inseridos no banco de dados. Agora vamos aprender a recuperar dados para que possamos visualizar as inserções de dados.
+
 ### 2. Read (Ler)
 
 - **`findOne`**: Busca um único documento
@@ -142,7 +144,21 @@ atuar sobre multiplos documentos de uma vez só.
 
   ![alt text](img/image-3.png)
 
-### 2. Delete (Deletar)
+### 3. Update (atualizar)
+
+Usamos o método update para atualizar dados já inseridos dentro da base, para isso usamos o `updateOne()` ou o `updateMany()`, que pode ser usado simplesmente como `update()`.
+
+```javascript
+db.collection.updateOne({ nome: "João" });
+```
+
+- **`DeleteMany()`**: Atualiza múltiplos documentos
+
+  ```javascript
+  db.collection.updateMany({ idade: { $lt: 30 } }); // Remove todos os usuários com idade menor que 30
+  ```
+
+### 4. Delete (Deletar)
 
 - **`DeleteOne`**: Deleta um único documento
 

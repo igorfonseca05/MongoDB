@@ -76,7 +76,7 @@ Para resolver esse problema precisamos criar, caso ela não exista, a pasta `dat
 
 onde `mkdir` é o comando dentro do windows que usamos para criar uma nova pasta e o `data` é o nome da pasta. Importante destacar é preciso estar atento ao caminho mostrado no terminal. Se eu digitasse o código abaixo no terminal:
 
-![alt text](image.png)
+![alt text](img/caminho.png)
 
 a pasta `data` seria criada dentro de `C:\users\Igor\Documentos\Repositórios\MongoDB`, e isso não é o que queremos. Para isso usamos o comando
 
@@ -94,7 +94,7 @@ Feito isso teremos uma pasta criada na raiz, e agora mostraremos ao mongo onde e
 
 quando clicar no `enter`, será mostrado muitos logs onde um deles nos mostra que o servidor mongo foi iniciado e está esperando por conexões na porta padrão.
 
-![alt text](img/coneão.png.png)
+![alt text](img/coneão.png)
 
 Agora se voltarmos ao terminal e digitarmos:
 

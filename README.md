@@ -148,14 +148,43 @@ atuar sobre multiplos documentos de uma vez só.
 
 Usamos o método update para atualizar dados já inseridos dentro da base, para isso usamos o `updateOne()` ou o `updateMany()`, que pode ser usado simplesmente como `update()`.
 
+**Estrutura básica do comando**
+
 ```javascript
-db.collection.updateOne({ nome: "João" });
+db.collection.update( <filtro>, <atualização> ,<opções> )
 ```
 
-- **`DeleteMany()`**: Atualiza múltiplos documentos
+Para entendermos bem como usar o **update** no mongoDB, precisamos conhecer primeiro alguns operadores de atualização do mongoDB. Na tabela abaixo podemos ver quais são eles, uma breve descrição sobre como atuam e um exemplo de como usá-los.
+
+**Operadores de Atualização no MongoDB**
+
+| **Operador**   | **Descrição**                                                                                  | **Exemplo de Uso**                            |
+| -------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `$set`         | Define o valor de um campo existente ou adiciona um novo campo.                                | `{ $set: { idade: 28 } }`                     |
+| `$unset`       | Remove um campo do documento.                                                                  | `{ $unset: { sobrenome: "" } }`               |
+| `$inc`         | Incrementa o valor de um campo numérico.                                                       | `{ $inc: { idade: 1 } }`                      |
+| `$rename`      | Renomeia um campo no documento.                                                                | `{ $rename: { "sobrenome": "ultimoNome" } }`  |
+| `$setOnInsert` | Define o valor de um campo **somente** quando um novo documento é criado (usado com `upsert`). | `{ $setOnInsert: { cidade: "São Paulo" } }`   |
+| `$push`        | Adiciona um valor a um array.                                                                  | `{ $push: { notas: 9 } }`                     |
+| `$pop`         | Remove o primeiro ou o último elemento de um array (`1` para o último, `-1` para o primeiro).  | `{ $pop: { notas: 1 } }`                      |
+| `$pull`        | Remove do array todos os elementos que atendem a uma condição especificada.                    | `{ $pull: { notas: { $lt: 5 } } }`            |
+| `$addToSet`    | Adiciona um valor a um array, mas somente se ele ainda não estiver presente.                   | `{ $addToSet: { cursos: "React" } }`          |
+| `$currentDate` | Define um campo com a data e hora atuais.                                                      | `{ $currentDate: { dataAtualizacao: true } }` |
+| `$max`         | Atualiza o campo apenas se o valor especificado for maior que o valor atual.                   | `{ $max: { idade: 30 } }`                     |
+| `$min`         | Atualiza o campo apenas se o valor especificado for menor que o valor atual.                   | `{ $min: { idade: 20 } }`                     |
+
+**Comandos mais comuns no MongoDB**
+
+- **`UpdateOne`**: Atualiza um único documento
 
   ```javascript
-  db.collection.updateMany({ idade: { $lt: 30 } }); // Remove todos os usuários com idade menor que 30
+  db.collection.updateOne({ name: "Aline" }, { $set: { idade: 28 } });
+  ```
+
+* **`UpdateMany()`**: Atualiza **todos** os documentos que correspondem ao filtro
+
+  ```javascript
+  db.collection.updateMany({ name: "Aline" }, { $set: { idade: 28 } });
   ```
 
 ### 4. Delete (Deletar)

@@ -6,7 +6,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 ## Andamento do Curso
 
-![seção 4](4.png)
+![seção 4](img/4.png)
 
 - [x] Seção 1: [Introdução](#seção-1---introdução)
 - [x] Seção 2: [Instalação](#seção-2---instalando-mongodb)
@@ -464,21 +464,73 @@ Modelar dados corretamente é essencial para garantir a performance e a escalabi
 
 ## Tipos de Relacionamentos no MongoDB
 
-Embora não possua chaves estrangeiras como bancos relacionais, o MongoDB suporta diferentes tipos de relacionamentos usando referências (referencing) ou embutimento (embedding). Os principais tipos são:
+Embora não possua chaves estrangeiras como bancos relacionais, o MongoDB suporta diferentes tipos de relacionamentos usando **referências** (referencing) ou **embutimento** (embedding). Os principais tipos são:
 
 1. **Relação Um-para-Um** (1:1)
 
 - Um documento A está relacionado a apenas um documento B e vice-versa.
-- **Exemplos**: Perfil de usuário e configurações do usuário, documentos que compartilham uma identificação única.
+- **Exemplos**: Estudante e carteirinha são documentos que compartilham uma identificação única.
+
+  ![alt text](img/1-1.png)
 
 2.  **Relação um-para-Muitos** (1)
 
 - Um documento A está relacionado a muitos documentos B.
 - **Exemplos**: Autor e posts de blog, cliente e pedidos de compra.
 
+  ![alt text](img/1n.png)
+
 3. **Relação Muitos-para-Muitos(N)**
 
 - Muitos documentos A estão relacionados a muitos documentos B.
 - **Exemplos**: Estudantes e cursos, usuários e grupos.
+
+  ![alt text](img/nn.png)
+
+### Modelagem de Relacionamentos
+
+No MongoDB, as estratégias de modelagem se dividem em duas abordagens principais:
+
+1. **Embutimento (Embedding)**
+
+- Os dados relacionados são armazenados dentro de um mesmo documento.
+- É indicado para relacionamentos estreitamente ligados, onde os dados geralmente são recuperados juntos.
+- **Vantagem**: Acesso rápido, pois todos os dados estão em um único documento.
+- **Desvantagem**: Pode levar à duplicação de dados e documentos grandes demais.
+
+```javascript
+{
+  "_id": 1,
+  "cliente": "Maria",
+  "itens": [
+    { "produto": "Notebook", "quantidade": 1, "preco": 1500 },
+    { "produto": "Mouse", "quantidade": 1, "preco": 50 }
+  ]
+}
+```
+
+2. **Referenciamento (Referencing)**
+
+- Os dados relacionados são armazenados em documentos separados e referenciados por meio de IDs.
+- É indicado para relacionamentos mais complexos ou onde o tamanho do documento pode crescer de forma descontrolada.
+- **Vantagem**: Permite uma estrutura mais modular e flexível.
+- **Desvantagem**: Pode exigir múltiplas consultas (lookup) para agregar os dados
+
+```javascript
+// Documento Cliente
+{
+  "_id": 1,
+  "nome": "Maria",
+  "pedidos": [1001, 1002]
+}
+
+// Documento Pedido
+{
+  "_id": 1001,
+  "itens": [
+    { "produto": "Notebook", "quantidade": 1, "preco": 1500 }
+  ]
+}
+```
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

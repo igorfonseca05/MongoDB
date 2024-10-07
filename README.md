@@ -52,6 +52,25 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 
 # Seção 4 - CRUD
 
+- [CRUD no MongoDB](#indice-crud)
+  - [1. Create (Inserir)](#1-create-inserir)
+    - [Estrutura básica do comando](#estrutura-básica-do-comando)
+    - [Exemplo de uso do `insert()`](#exemplo-de-uso-do-insert)
+  - [2. Read (Ler)](#2-read-ler)
+    - [Estrutura básica do comando](#estrutura-básica-do-comando-1)
+    - [Exemplo de uso do `find()`](#exemplo-de-uso-do-find)
+    - [Usando `find()` com operadores](#usando-find-com-operadores)
+  - [3. Update (Atualizar)](#3-update-atualizar)
+    - [Estrutura básica do comando](#estrutura-básica-do-comando-2)
+    - [Operadores de Atualização no MongoDB](#operadores-de-atualização-no-mongodb)
+    - [Exemplos de uso do update no MongoDB](#exemplos-de-uso-do-update-no-mongodb)
+  - [4. Delete (Remover)](#4-delete-remover)
+    - [Estrutura básica do comando](#estrutura-básica-do-comando-3)
+    - [Exemplos de uso do `delete()`](#exemplos-de-uso-do-delete-no-mongodb)
+    - [Exemplo de remoção de collections com `drop()`](#exemplo-de-remoção-de-collections-com-drop)
+- [Operadores de Comparação no MongoDB](#operadores-de-comparação-no-mongodb)
+- [Projections (Projeções)](#projections)
+
 No MongoDB, CRUD é um acrônimo que representa as operações básicas de manipulação de dados:
 
 - **Create (Criar)**: Insere novos documentos em uma coleção.
@@ -399,5 +418,29 @@ db.collection.delete( <filtro> ,<opções> )
   ```javascript
   db.collection.deleteMany({ cidade: "São Paulo" });
   ```
+
+### Exemplos de uso do delete com [Operadores](#operadores-de-comparação-no-mongodb)
+
+- `DeleteMany()` com campo e condição
+
+  ```javascript
+  db.collection.deleteMany({ idade: { $gt: 30 } });
+  ```
+
+Podemos usar qualquer um dos operadores mostrados na tabela de operadores acima no método `delete`
+
+Usamos o comando `delete` a nivel de documentos. Como fazemos então para remover uma **collection** inteira de uma vez só da base de dados? Para isso usamos o `drop()`!
+
+**Importante**: Os comandos de deletar devem ser usados com cautela, pois uma vez removido os documentos e collections não é possível recuperá-los.
+
+### Exemplo de remoção de collections com `drop()`
+
+```javascript
+// Remove a coleção chamada "users"
+db.users.drop();
+```
+
+- No exemplo acima, a coleção users será completamente removida do banco de dados, incluindo todos os documentos e o esquema associado a ela.
+- Se a coleção não existir, o comando drop() retornará false. Caso a coleção exista e seja removida com sucesso, o comando retornará true.
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

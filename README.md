@@ -14,7 +14,7 @@ Este repositório contém materiais e projetos relacionados aos meus estudos de 
 - [x] Seção 4: [CRUD](#seção-4---crud)
 - [x] Seção 5: [Modelagem e Relacionamentos](#seção-4---modelagem-e-relacionamentos)
 - [x] Seção 6: [Schema e Validação](#seção-5---schema-e-validation)
-- [ ] Seção 7: Algumas preparações para as consultas
+- [ ] Seção 7: [Algumas preparações para as consultas](#seção-7---algumas-preparações-para-as-consultas)
 - [ ] Seção 8: Consultas! Vamos buscar nossos dados!
 - [ ] Seção 9: Consultas | Combinando operadores e se aprofundando
 - [ ] Seção 10: Atualizações
@@ -119,7 +119,25 @@ Para facilitar o entendimento do que foi explicado acima, veja a imagem abaixo e
 
 ## Criar Banco de Dados no MongoDB
 
-Diferente de bancos relacionais, onde criamos uma tabela que fica na base de dados até que algum dado seja adicionado nela, no MongoDB isso não acontence, pois o banco de dados só é criado no momento em que adicionamos um dado a ele. Para criar um BD no MongoDB, digitamos no CMD
+Diferente de bancos relacionais, onde criamos uma tabela que fica na base de dados até que algum dado seja adicionado nela, no MongoDB isso não acontence, pois o banco de dados só é criado no momento em que adicionamos um dado a ele. Para criar um BD no MongoDB, digitamos no CMD:
+
+```javascript
+use "nome que quer dar a sua Base"
+```
+
+o resultado dessa operação é a mensagem
+
+![alt text](img/useCommand.png)
+
+indicando que, estamos na base. Porém se você digitar no cmd o comando:
+
+```javascript
+show dbs
+```
+
+para mostrar as bases criadas, você não verá a base que criou, porque como mencionado anteriormente, apesar de ter "criado" a base, o MongoDB só a criará de fato quando for adicionado algum dado a ela.
+
+Veremos nas seções seguintes como fazer todo tipo de operação que nos permita gerenciar um banco de dados no MongoDB, mas por agora, a carater de exemplo vou mostrar o que expliquei acima num exemplo prático. Não se preocupe se não entender os comandos agora, logo mais tudo ficará mais claro.
 
 # Seção 4 - CRUD
 
@@ -604,7 +622,7 @@ No MongoDB, as estratégias de modelagem se dividem em duas abordagens principai
 }
 ```
 
-# Seção 5 - Schema e Validation
+# Seção 6 - Schema e Validation
 
 O MongoDB é um banco de dados NoSQL, conhecido por sua flexilibilidade na adição de documentos com diferentes formatos em diferentes coleções. Essa flexibilidade pode levar a inconsistências caso não haja nenhum tipo de controle dos dados que estão sendo inseridos no banco. Pensando justamente em solucionar esse problema, o MongoDB introduziu o conceito de **Schema Validation**, que nos permite definir regras que garatam a integridade dos dados.
 
@@ -652,5 +670,11 @@ db.createCollection("students", {
    }
 } )
 ``` -->
+
+# Seção 7 - Algumas preparações para as consultas
+
+Nesta seção veremos como usar comandos de terminal para importar bases de dados dentro do nosso mongoDB, além disso, conheceremos a estrutura basica dos documentos da base que usáremos em nossos exemplos de queries.
+
+Para começar, por questão de simplicidade usáremos uma base de dados com uma coleção chamada de **pokemon** obtemos dados de 800 pokemons e adicionamos todos esses dados dentro um arquivo json.
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

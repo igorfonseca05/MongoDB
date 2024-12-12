@@ -675,6 +675,27 @@ db.createCollection("students", {
 
 Nesta seção veremos como usar comandos de terminal para importar bases de dados dentro do nosso mongoDB, além disso, conheceremos a estrutura basica dos documentos da base que usáremos em nossos exemplos de queries.
 
-Para começar, por questão de simplicidade usáremos uma base de dados com uma coleção chamada de **pokemon** obtemos dados de 800 pokemons e adicionamos todos esses dados dentro um arquivo json.
+Para começar, por questão de simplicidade usáremos uma base de dados com uma coleção chamada **pokemon**, onde adicionamos dados de 800 pokemons e salvamos o arquivo em formato json.
+
+![alt text](image.png)
+
+Os documentos salvos dentro da collection terão a estrura base:
+
+```json
+{
+  "_id": 4,
+  "types": ["Grass", "Poison", "Fire"],
+  "name": "Mega Venusaur",
+  "legendary": false,
+  "hp": 80,
+  "attack": 100,
+  "defense": 123,
+  "speed": 80,
+  "generation": 1,
+  "startWith": "M"
+}
+```
+
+Para importarmos o arquivo json como uma base de dados para dentro do mongoDB precisamos do caminho do arquivo. Para obter esse dado, abrimos a pasta onde está salvo o arquivo e na barra
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

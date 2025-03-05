@@ -698,4 +698,32 @@ Os documentos salvos dentro da collection terão a estrura base:
 
 Para importarmos o arquivo json como uma base de dados para dentro do mongoDB precisamos do caminho do arquivo. Para obter esse dado, abrimos a pasta onde está salvo o arquivo e na barra
 
+# Seção 14 - Aggregation
+
+O Aggregation no MongoDB é um processo de transformação e análise de dados dentro do banco. Ele permite realizar operações complexas, como filtragem, agrupamento, soma, média, ordenação e junção de coleções.
+
+### 🔹 Como funciona?
+
+O Aggregation Framework usa o conceito de **pipeline**, onde os documentos passam por estágios de processamento em sequência. Cada estágio aplica uma transformação nos dados antes de passá-los para o próximo.
+
+### 📌 Operadores comuns
+
+| Operador       | Função                                                             |
+| -------------- | ------------------------------------------------------------------ |
+| `$match`       | Filtra documentos, semelhante ao `find`.                           |
+| `$group`       | Agrupa dados e realiza cálculos, como soma e média.                |
+| `$sort`        | Ordena os documentos em ordem crescente ou decrescente.            |
+| `$project`     | Seleciona quais campos serão exibidos e pode criar novos campos.   |
+| `$limit`       | Limita a quantidade de documentos retornados.                      |
+| `$skip`        | Pula um número específico de documentos no resultado.              |
+| `$lookup`      | Faz um **join** com outra coleção.                                 |
+| `$unwind`      | Desestrutura arrays, criando um documento para cada item do array. |
+| `$addFields`   | Adiciona novos campos aos documentos.                              |
+| `$replaceRoot` | Substitui a estrutura do documento por um subdocumento específico. |
+| `$count`       | Conta o número total de documentos.                                |
+| `$facet`       | Permite fazer múltiplas agregações ao mesmo tempo.                 |
+| `$bucket`      | Agrupa dados em intervalos definidos.                              |
+| `$sample`      | Retorna uma amostra aleatória de documentos.                       |
+| `$merge`       | Salva os resultados da agregação em outra coleção.                 |
+
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

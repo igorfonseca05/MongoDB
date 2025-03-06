@@ -708,23 +708,24 @@ O Aggregation Framework usa o conceito de **pipeline**, onde os documentos passa
 
 ### 📌 Operadores comuns
 
-| Operador       | Função                                                             |
-| -------------- | ------------------------------------------------------------------ |
-| `$match`       | Filtra documentos, semelhante ao `find`.                           |
-| `$group`       | Agrupa dados e realiza cálculos, como soma e média.                |
-| `$sort`        | Ordena os documentos em ordem crescente ou decrescente.            |
-| `$project`     | Seleciona quais campos serão exibidos e pode criar novos campos.   |
-| `$limit`       | Limita a quantidade de documentos retornados.                      |
-| `$skip`        | Pula um número específico de documentos no resultado.              |
-| `$lookup`      | Faz um **join** com outra coleção.                                 |
-| `$unwind`      | Desestrutura arrays, criando um documento para cada item do array. |
-| `$addFields`   | Adiciona novos campos aos documentos.                              |
-| `$replaceRoot` | Substitui a estrutura do documento por um subdocumento específico. |
-| `$count`       | Conta o número total de documentos.                                |
-| `$facet`       | Permite fazer múltiplas agregações ao mesmo tempo.                 |
-| `$bucket`      | Agrupa dados em intervalos definidos.                              |
-| `$sample`      | Retorna uma amostra aleatória de documentos.                       |
-| `$merge`       | Salva os resultados da agregação em outra coleção.                 |
+| Operador        | Função                                                             |
+| --------------- | ------------------------------------------------------------------ |
+| `$match`        | Filtra documentos, semelhante ao `find`.                           |
+| `$group`        | Agrupa dados e realiza cálculos, como soma e média.                |
+| `$sort`         | Ordena os documentos em ordem crescente ou decrescente.            |
+| `$project`      | Seleciona quais campos serão exibidos e pode criar novos campos.   |
+| `$limit`        | Limita a quantidade de documentos retornados.                      |
+| `$skip`         | Pula um número específico de documentos no resultado.              |
+| `$lookup`       | Faz um **join** com outra coleção.                                 |
+| `$unwind`       | Desestrutura arrays, criando um documento para cada item do array. |
+| `$addFields`    | Adiciona novos campos aos documentos.                              |
+| `$replaceRoot`  | Substitui a estrutura do documento por um subdocumento específico. |
+| `$count`        | Conta o número total de documentos.                                |
+| `$facet`        | Permite fazer múltiplas agregações ao mesmo tempo.                 |
+| `$bucket`       | Agrupa dados em intervalos definidos.                              |
+| `$sample`       | Retorna uma amostra aleatória de documentos.                       |
+| `$merge`        | Salva os resultados da agregação em outra coleção.                 |
+| `$arrayElement` | Buscamos dados em um array num estágio qualquer.                   |
 
 ### 📌 Resumo
 
@@ -749,8 +750,72 @@ o arquico csv estava dentro da pasta downloads, logo tive que navegar até o loc
 
 ### ❌ O problema
 
-Para utilizarmos um aggregation na nossa base é pq precisamos resolver um problema, que nesse caso será:
+Para utilizarmos um aggregation na nossa base é pq precisamos resolver um problema. Nesse caso, vemos que na estrutura de dados acima temos os campos _First_Pokemon_, _Second_pokemon_ e _Winner_, que são representados por números e que não significam muito, são apenas números. Entretando esses valores são id's que referenciam documentos em outras collections, então, o problema a ser resolvido aqui é:
 
-Na estrutura de dados acima temos o _First_Pokemon_, _Second_pokemon_ e _Winner_, que são representados por números e que não significam. Entretando esses valores são id's que referenciam documentos em outras collections, então, podemos
+     Como podemos trocar os id's do documento acima por dados do pokemon que o número referencia em outra collection?
+
+ou seja, na collection que é referenciada no documento acima, o pokemon com id 237 e 683 são respectivamente
+
+```javascript
+{
+        "_id" : 237,
+        "types" : [
+                "Fire"
+        ],
+        "name" : "Slugma",
+        "legendary" : false,
+        "hp" : 40,
+        "attack" : 40,
+        "defense" : 40,
+        "speed" : 20,
+        "generation" : 2
+}
+
+```
+
+```javascript
+{
+        "_id" : 683,
+        "types" : [
+                "Dragon"
+        ],
+        "name" : "Druddigon",
+        "legendary" : false,
+        "hp" : 77,
+        "attack" : 120,
+        "defense" : 90,
+        "speed" : 48,
+        "generation" : 5
+}
+```
+
+Portanto a proposta aqui é fazer com que os documentos na collection combats sejam mostrados como:
+
+```javascript
+{
+        "_id" : ObjectId("546asdfa65sd8568768"),
+        "First_pokemon" : 'Slugma',
+        "Second_pokemon" : 'Druddigon',
+        "Winner" : 'Druddigon'
+}
+```
+
+Para fazer isso, vamos utilizar o aggragation para executar esse processo.
+
+### O aggregate
+
+O aggregation funciona essencialmente como uma query por estágios
+
+    [{stage1}, {stage2}, ...]
+
+onde a saída do primeiro estágio é a entrada do segundo estágio e assim por diante, é dai que tiramos o conceito de pipeline.
+
+Para criar um stage do aggregate, fazemos no terminal do mongo
+
+```shell
+db.combats.aggregate([{},{},...])
+```
+
+onde cada stage está associado ao uso de um dos operadores mostrados na tabela acima.
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

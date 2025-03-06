@@ -1077,23 +1077,21 @@ db.pedidos.insertMany([
 
 ### Exercicios - use o aggregation e seus operadores para realizar os exercicios abaixo.
 
-1. Filtrar pedidos com valor maior que 100,
-1. Filtrar pedidos feitos por "Carlos" OU com total acima de 200
-1. Retornar o total de vendas por cliente,
-1. Ver o pedido mais caro:
-1. Contar quantos pedidos cada cliente fez:
-1. Ver pedidos feitos depois de 3 de março de 2024:
+1.  Filtrar pedidos com valor maior que 100,
 
-## Resoluções
+        db.pedidos.aggregate([
+          { $match: { total: { $gte: 100} } }
+        ])
 
-    1. db.pedidos.aggregate([
-        { $match: { total: { $gte: 100} } }
-      ])
+1.  Filtrar pedidos feitos por "Carlos" OU com total acima de 200
 
----
+        db.pedidos.aggregate([
+          { $match: { $or: [{client: 'Carlos'}, {total: {$gt: 200} } ] } }
+        ])
 
-    2. db.pedidos.aggregate([
-        { $match: { $or: [{client: 'Carlos'}, {total: {$gt: 200} } ] } }
-      ])
+1.  Retornar o total de vendas por cliente,
+1.  Ver o pedido mais caro:
+1.  Contar quantos pedidos cada cliente fez:
+1.  Ver pedidos feitos depois de 3 de março de 2024:
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

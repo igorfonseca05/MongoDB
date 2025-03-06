@@ -726,4 +726,31 @@ O Aggregation Framework usa o conceito de **pipeline**, onde os documentos passa
 | `$sample`      | Retorna uma amostra aleatória de documentos.                       |
 | `$merge`       | Salva os resultados da agregação em outra coleção.                 |
 
+### 📌 Resumo
+
+✅ **Pipeline** = sequência de estágios que transformam os dados passo a passo.  
+✅ Cada estágio modifica o resultado antes de passar para o próximo.  
+✅ Usado no aggregate() para fazer consultas avançadas no MongoDB.
+
+No curso, usamos o arquivo **combats.csv** para executarmos os testes na nossa base, para isso precisamos importa-lo primeiro usando o comando
+
+      mongoimport --db pokemoncenter --collection combats --type csv --file combats.csv --headline
+
+o arquico csv estava dentro da pasta downloads, logo tive que navegar até o local do arquivo no terminal do vscode e executar o código mostrado acima. Uma vez importado, a estrutura dos documentos na base de dados é:
+
+```javascript
+{
+        "_id" : ObjectId("67c8dd9990e2d47f3179a97e"),
+        "First_pokemon" : 237,
+        "Second_pokemon" : 683,
+        "Winner" : 683
+}
+```
+
+### ❌ O problema
+
+Para utilizarmos um aggregation na nossa base é pq precisamos resolver um problema, que nesse caso será:
+
+Na estrutura de dados acima temos o _First_Pokemon_, _Second_pokemon_ e _Winner_, que são representados por números e que não significam. Entretando esses valores são id's que referenciam documentos em outras collections, então, podemos
+
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

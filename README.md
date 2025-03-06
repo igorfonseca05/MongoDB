@@ -887,7 +887,7 @@ o resultado do aggregate acima será
 ];
 ```
 
-No retorno acima vemos que os dados atrelados aos pokemons estão dentro um um array. Para podermos acessar os dados de interesse, nesse caso o _name_, precisamos remove-los de dentro do array. O array aparece envolvendo os dados, porque o mongoDB não consegue saber se no processo de busca, haverá somente um \_id com valor de 237 na collection 'pokemon' por exemplo, e portanto, caso exista mais de um, ele retorna todos dentro de um array. Queremos então retirar o documento retornado de dentro do array, e para isso, adicionamos um novo stage no nosso aggregation usando o `$project`, que faz um papel similar ao `projection` nas nossas queries, ou seja, reestrura a forma como o dado é retornado.
+No retorno acima vemos que os dados atrelados aos pokemons estão dentro um um array. Para podermos acessar os dados de interesse, nesse caso o _name_, precisamos remove-los de dentro do array. O array aparece envolvendo os dados, porque o mongoDB não consegue saber se no processo de busca, haverá somente um \_id com valor de 237 na collection 'pokemon' por exemplo, e portanto, caso exista mais de um, ele retorna todos dentro de um array. Queremos então retirar o documento retornado de dentro do array, e para isso, adicionamos um novo stage ao nosso aggregation usando o `$project`, que faz um papel similar ao `projection` nas nossas queries, ou seja, reestrura a forma como o dado é retornado, nos dando a possibilidade de definir como dado será mostrado.
 
 ```javascript
 db.combats.aggregate([
@@ -911,7 +911,14 @@ db.combats.aggregate([
   },
   {
     $project: {
-      _id: 0, // O id naõ será mais mostrado no retorno da query.
+      _id: 0, // O id nâo será mais mostrado no retorno da query.
+      Winner: 1 // O Winner será mais mostrado no retorno da query.
+      pokemon1: { // Escolhemos um numero para o project
+          $arrayElemAt: ['pokemon1', 0] // operador que remove o elemento 0 do array pokemon1
+      },
+      pokemon2: {
+          $arrayElemAt: ['pokemon2', 0]
+      }
     },
   },
   {
@@ -920,42 +927,104 @@ db.combats.aggregate([
 ]);
 ```
 
-o Resultado será:
+O resultado será:
 
 ```javascript
 [
   {
-    First_pokemon: 237, // localField stage 1
-    Second_pokemon: 683, // localField stage 2
     Winner: 683,
-    pokemon1: [
-      {
-        _id: 237, // foreignField stage 1
-        types: ["Fire"],
-        name: "Slugma",
-        legendary: false,
-        hp: 40,
-        attack: 40,
-        defense: 40,
-        speed: 20,
-        generation: 2,
-      },
-    ],
-    pokemon2: [
-      {
-        _id: 683, // foreignField stage 2
-        types: ["Dragon"],
-        name: "Druddigon",
-        legendary: false,
-        hp: 77,
-        attack: 120,
-        defense: 90,
-        speed: 48,
-        generation: 5,
-      },
-    ],
+    pokemon1: {
+      _id: 237,
+      types: ["Fire"],
+      name: "Slugma",
+      legendary: false,
+      hp: 40,
+      attack: 40,
+      defense: 40,
+      speed: 20,
+      generation: 2,
+    },
+    pokemon2: {
+      _id: 683,
+      types: ["Dragon"],
+      name: "Druddigon",
+      legendary: false,
+      hp: 77,
+      attack: 120,
+      defense: 90,
+      speed: 48,
+      generation: 5,
+    },
   },
 ];
 ```
+
+Agora precisamos preencher o campo _Winner_ com o dado que precisamos, para fazer isso podemos adicionar mais um stage na nossa query. Podemos adicionar quantos stage de project quisermos, como podemos ver abaixo:
+
+```javascript
+db.combats.aggregate([
+  {
+    $lookup: {
+      from: "pokemon",
+      localField: "First_pokemon",
+      foreignField: "_id",
+      as: "pokemon1",
+    },
+  },
+  {
+    $lookup: {
+      from: "pokemon",
+      localField: "Second_pokemon",
+      foreignField: "_id",
+      as: "pokemon2",
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      Winner: 1,
+      pokemon1: {
+        $arrayElemAt: ["pokemon1", 0],
+      },
+      pokemon2: {
+        $arrayElemAt: ["pokemon2", 0],
+      },
+    },
+  },
+  {
+    $project: {
+      // 4° stage
+      Winner: {
+        // operador condição
+        $cond: {
+          // Usamos o $ para acessar campos disponiveis no project
+          if: { $eq: ["$Winner", "$pokemon1._id"] },
+          then: "$pokemon1.name",
+          else: "$pokemon2.name",
+        },
+      },
+      First_pokemon: "$pokemon1.name",
+      Second_pokemon: "$pokemon2.name",
+    },
+  },
+  {
+    $limit: 1,
+  },
+]);
+```
+
+o resultado da nossa query acima será então:
+
+```javascript
+[
+  {
+    Winner: "Druddigon",
+    First_pokemon: "Slugma",
+    Second_pokemon: "Druddigon",
+  },
+];
+```
+
+que era o objetivo proposto no inicio dos estudos.
 
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

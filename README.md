@@ -887,7 +887,7 @@ o resultado do aggregate acima será
 ];
 ```
 
-No retorno acima não precisamos do \_id, uma vez que o que buscamos um documento com somente três campos. Para isso, adicionamos um novo stage na nosso aggregation.
+No retorno acima vemos que os dados atrelados aos pokemons estão dentro um um array. Para podermos acessar os dados de interesse, nesse caso o _name_, precisamos remove-los de dentro do array. O array aparece envolvendo os dados, porque o mongoDB não consegue saber se no processo de busca, haverá somente um \_id com valor de 237 na collection 'pokemon' por exemplo, e portanto, caso exista mais de um, ele retorna todos dentro de um array. Queremos então retirar o documento retornado de dentro do array, e para isso, adicionamos um novo stage no nosso aggregation usando o `$project`, que faz um papel similar ao `projection` nas nossas queries, ou seja, reestrura a forma como o dado é retornado.
 
 ```javascript
 db.combats.aggregate([

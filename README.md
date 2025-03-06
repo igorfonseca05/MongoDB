@@ -1027,4 +1027,73 @@ o resultado da nossa query acima será então:
 
 que era o objetivo proposto no inicio dos estudos.
 
+# Exercicios para praticar o aggregate
+
+Crie a base de dados
+
+    use loja_virtual
+
+insira a coleção de documentos
+
+```javascript
+db.pedidos.insertMany([
+  {
+    _id: 1,
+    cliente: "Carlos",
+    total: 150,
+    itens: [{ produto: "Celular", preco: 150 }],
+    data: ISODate("2024-03-01T10:00:00Z"),
+  },
+  {
+    _id: 2,
+    cliente: "Ana",
+    total: 300,
+    itens: [{ produto: "Notebook", preco: 300 }],
+    data: ISODate("2024-03-02T11:30:00Z"),
+  },
+  {
+    _id: 3,
+    cliente: "Bruno",
+    total: 50,
+    itens: [{ produto: "Mouse", preco: 50 }],
+    data: ISODate("2024-03-03T14:00:00Z"),
+  },
+  {
+    _id: 4,
+    cliente: "Carlos",
+    total: 100,
+    itens: [{ produto: "Teclado", preco: 100 }],
+    data: ISODate("2024-03-04T09:15:00Z"),
+  },
+  {
+    _id: 5,
+    cliente: "Ana",
+    total: 200,
+    itens: [{ produto: "Monitor", preco: 200 }],
+    data: ISODate("2024-03-05T16:45:00Z"),
+  },
+]);
+```
+
+### Exercicios - use o aggregation e seus operadores para realizar os exercicios abaixo.
+
+1. Filtrar pedidos com valor maior que 100,
+1. Filtrar pedidos feitos por "Carlos" OU com total acima de 200
+1. Retornar o total de vendas por cliente,
+1. Ver o pedido mais caro:
+1. Contar quantos pedidos cada cliente fez:
+1. Ver pedidos feitos depois de 3 de março de 2024:
+
+## Resoluções
+
+    1. db.pedidos.aggregate([
+        { $match: { total: { $gte: 100} } }
+      ])
+
+---
+
+    2. db.pedidos.aggregate([
+        { $match: { $or: [{client: 'Carlos'}, {total: {$gt: 200} } ] } }
+      ])
+
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

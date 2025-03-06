@@ -818,4 +818,144 @@ db.combats.aggregate([{},{},...])
 
 onde cada stage está associado ao uso de um dos operadores mostrados na tabela acima.
 
+Para o nosso problema, vamos iniciar a query fazendo:
+
+```javascript
+db.combats.aggregate([
+  // collection onde vamos fazer o aggregate
+  {
+    $lookup: {
+      // operador de join
+      from: "pokemon", // qual é a collection onde vai buscar os dados
+      localField: "First_pokemon", // campo da collection local que armazena o dado a ser buscado
+      foreignField: "_id", // campo da collection externa que armazena o dado que está sendo buscado
+      as: "pokemon1", // nome do campo que armazena do documento encontrado
+    },
+  },
+  {
+    $lookup: {
+      from: "pokemon",
+      localField: "Second_pokemon",
+      foreignField: "_id",
+      as: "pokemon2",
+    },
+  },
+  {
+    $limit: 1,
+  },
+]);
+```
+
+o resultado do aggregate acima será
+
+```javascript
+[
+  {
+    _id: {
+      $oid: "67c8dd9990e2d47f3179a97e",
+    },
+    First_pokemon: 237, // localField stage 1
+    Second_pokemon: 683, // localField stage 2
+    Winner: 683,
+    pokemon1: [
+      {
+        _id: 237, // foreignField stage 1
+        types: ["Fire"],
+        name: "Slugma",
+        legendary: false,
+        hp: 40,
+        attack: 40,
+        defense: 40,
+        speed: 20,
+        generation: 2,
+      },
+    ],
+    pokemon2: [
+      {
+        _id: 683, // foreignField stage 2
+        types: ["Dragon"],
+        name: "Druddigon",
+        legendary: false,
+        hp: 77,
+        attack: 120,
+        defense: 90,
+        speed: 48,
+        generation: 5,
+      },
+    ],
+  },
+];
+```
+
+No retorno acima não precisamos do \_id, uma vez que o que buscamos um documento com somente três campos. Para isso, adicionamos um novo stage na nosso aggregation.
+
+```javascript
+db.combats.aggregate([
+  // collection onde vamos fazer o aggregate
+  {
+    $lookup: {
+      // operador de join
+      from: "pokemon", // qual é a collection onde vai buscar os dados
+      localField: "First_pokemon", // campo da collection local que armazena o dado a ser buscado
+      foreignField: "_id", // campo da collection externa que armazena o dado que está sendo buscado
+      as: "pokemon1", // nome do campo que armazena do documento encontrado
+    },
+  },
+  {
+    $lookup: {
+      from: "pokemon",
+      localField: "Second_pokemon",
+      foreignField: "_id",
+      as: "pokemon2",
+    },
+  },
+  {
+    $project: {
+      _id: 0, // O id naõ será mais mostrado no retorno da query.
+    },
+  },
+  {
+    $limit: 1,
+  },
+]);
+```
+
+o Resultado será:
+
+```javascript
+[
+  {
+    First_pokemon: 237, // localField stage 1
+    Second_pokemon: 683, // localField stage 2
+    Winner: 683,
+    pokemon1: [
+      {
+        _id: 237, // foreignField stage 1
+        types: ["Fire"],
+        name: "Slugma",
+        legendary: false,
+        hp: 40,
+        attack: 40,
+        defense: 40,
+        speed: 20,
+        generation: 2,
+      },
+    ],
+    pokemon2: [
+      {
+        _id: 683, // foreignField stage 2
+        types: ["Dragon"],
+        name: "Druddigon",
+        legendary: false,
+        hp: 77,
+        attack: 120,
+        defense: 90,
+        speed: 48,
+        generation: 5,
+      },
+    ],
+  },
+];
+```
+
 ![footer mongo](https://github.com/user-attachments/assets/f787e696-bfc2-4829-b32b-9bc746c1dde4)

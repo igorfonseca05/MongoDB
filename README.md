@@ -696,7 +696,14 @@ Os documentos salvos dentro da collection terão a estrura base:
 }
 ```
 
-Para importarmos o arquivo json como uma base de dados para dentro do mongoDB precisamos do caminho do arquivo. Para obter esse dado, abrimos a pasta onde está salvo o arquivo e na barra
+Para importarmos um arquivo como uma base de dados para dentro do mongoDB precisamos navegar até a pasta onde está o arquivo pelo terminal, uma vez no diretório onde se encontra o arquivo executamos no terminal o código:
+
+    mongoimport --db 'Nome da base' --collection 'Nome da collection' --type 'formato do arquivo' --file 'nome do arquivo incluindo a extensão'
+
+caso os dados a serem adicionados estejam com a extensão _csv_ ou _json_, ao final do comando acima, adicione a diretiva
+
+    --headerline (csv)
+    -jsonArray (json)
 
 # Seção 14 - Aggregation
 

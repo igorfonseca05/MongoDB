@@ -703,7 +703,21 @@ Para importarmos um arquivo como uma base de dados para dentro do mongoDB precis
 caso os dados a serem adicionados estejam com a extensão _csv_ ou _json_, ao final do comando acima, adicione a diretiva
 
     --headerline (csv)
-    -jsonArray (json)
+    --jsonArray (json)
+
+Como exemplo, o comando usado para importar os dados dos pokemons para dentro do mongoDB foi
+
+    mongoimport --db pokemoncenter --collection pokemons --type json --file Spokemons.json --jsonArray
+
+:warning: Perceba que no nome da base de dados e da collection acima não adicionamos aspas
+
+# Seção 8 - Queries! Vamos buscar nossos dados
+
+Nesta seção vamos aprender a buscar dados na base de dados e para isso utilizaremos os operadores e operações que vimos acima.S
+
+#### Aula 66 - Encontrando pokemons lendários
+
+    db.pokemon.find({legendary: 'true'})
 
 # Seção 14 - Aggregation
 

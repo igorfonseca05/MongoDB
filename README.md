@@ -715,9 +715,111 @@ Como exemplo, o comando usado para importar os dados dos pokemons para dentro do
 
 Nesta seção vamos aprender a buscar dados na base de dados e para isso utilizaremos os operadores e operações que vimos acima.S
 
-#### Aula 66 - Encontrando pokemons lendários
+### Aula 66. Encontrando pokemons lendários
 
     db.pokemon.find({legendary: 'true'})
+
+### Aula 67. Entendendo o "it" e "distinct"
+
+Usamos o it para mostrar mais documentos após o retorno da query.
+
+    "it for more"
+
+escreva "it" no terminal e pressione enter.
+
+O **distinct** é usado para retornar valores únicos de um campo em uma coleção, por exemplo:
+
+    db.pokemon.distinct('generation')
+
+O resultado da query acime é:S
+
+    [1, 2, 3, 4, 5, 6]
+
+isso pq cada pokemon tem um generation associado, porém os valores de generation que esses pokemons podem receber
+variam entre 1 e 6.
+S
+
+### Aula 68. Buscando nome por regex
+
+O MongoDB permite buscas por padrões usando expressões regulares (regex) dentro do operador $regex. Isso é útil para encontrar documentos com base em partes de um texto.
+
+🎯 **Exemplo 1: Buscar nomes que começam com 'Mega'**
+
+    db.pokemon.find({ name: /^Mega/ })
+
+**🎯 Exemplo 2: Buscar nomes que terminam com 'saur'**
+
+    db.pokemon.find({ name: /saur$/ })
+
+**🎯 Exemplo 4: Buscar nomes que começam com "C" ou "B"**
+
+    db.pokemon.find({ name: /^[CB]/ })
+
+**🎯 Exemplo 5: Buscar todos que têm vogais duplas (ex: 'ee', 'oo')**
+
+    db.pokemon.find({ name: /(aa|ee|ii|oo|uu)/ })
+
+### Aula 69. Entendendo o projection na prática
+
+Projection é usado para selecionar quais campos serão retornados em uma consulta, reduzindo o volume de dados. Para fazer isso, passamos dentro do **find** um segundo objeto onde usaremos os valores _0, false, 1 ou true_ para mostrar ou esconder um campo. Veja o exemplo que usamos abaixo.
+
+    db.pokemon.find({ name: /^Mega/ }, {_id: 0, name: 1})
+
+o resultado da query acima será algo como:
+
+```javascript
+[
+  {
+    name: "Mega Abomasnow",
+  },
+  {
+    name: "Mega Absol",
+  },
+  {
+    name: "Mega Aerodactyl",
+  },
+];
+```
+
+### Aula 70. Aprendendo e utilizando flags no regex para case insensitive
+
+Buscar qualquer nome que contenha 'char' (maiúsculas ou minúsculas)
+
+    db.pokemon.find({ name: /char/i })
+
+i = insensitive
+
+### Aula 71. Encontrando pokemons mais fortes com operadores de comparacao
+
+- **Greater than or equal:**
+
+      db.pokemon.find({ attack: { $gte: 100 } })
+
+- **Less than or equal:**
+
+      db.pokemon.find({ attack: { $lte: 100 } })
+
+### Aula 72. Entendendo os operadores de comparacao disponiveis para nos
+
+- **Greater than:**
+
+      db.pokemon.find({ attack: { $gt: 100 } })
+
+- **Less than:**
+
+      db.pokemon.find({ attack: { $lt: 85 } })
+
+* **None equal**
+
+      db.pokemon.find({ attack: { $ne: 85 } })
+
+  vai retornar todos os documentos que não possuem attack com valor 85
+
+### Aula 73. Buscando strings dentro de arrays
+
+Aqui vamos buscar dentro do array de string **Types** dos nossos pokemons.
+
+      db.pokemon.find({ types:  'Fire' }, {name: 1, types: 1, _id: 0})
 
 # Seção 14 - Aggregation
 
